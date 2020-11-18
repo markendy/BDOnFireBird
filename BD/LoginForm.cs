@@ -12,8 +12,8 @@ namespace BD
 {
     public partial class LoginForm : Form
     {
-        private TextBox _loginTextBox;
-        private TextBox _passwordTextBox;
+        public TextBox _LoginTextBox;
+        public TextBox _PasswordTextBox;
 
         private Action _loginHandler;
 
@@ -21,17 +21,11 @@ namespace BD
         {
             InitializeComponent();
 
-            _loginTextBox = this.LoginTextBox;
-            _passwordTextBox = this.PasswordTextBox;
-
-            Login = _loginTextBox.Text;
-            Password = _passwordTextBox.Text;
-
+            _LoginTextBox = this.LoginTextBox;
+            _PasswordTextBox = this.PasswordTextBox;
+            
             _loginHandler += mainForm.Logined;
         }
-
-        public string Login { get; set; }
-        public string Password { get; set; }
 
         private void LoginButtonClick(object sender, EventArgs e)
         {
@@ -39,12 +33,16 @@ namespace BD
             {
                 _loginHandler();
             }
+            else
+            {
+                WinHelp.ShowMessage("Логин/пароль не распознан");
+            }
         }
 
         private bool Check()
         {
             //check user on bd
-            return true;
+            return false;
         }
     }
 }

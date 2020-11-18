@@ -7,10 +7,7 @@ using System.Windows.Forms;
 namespace BD
 {
     static class Program
-    {
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
+    {    
         [STAThread]
         static void Main()
         {

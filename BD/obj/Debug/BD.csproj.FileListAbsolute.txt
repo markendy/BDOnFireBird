@@ -10,3 +10,15 @@ C:\Users\Alex\Documents\Visual Studio 2017\Projects\BD\BD\obj\Debug\BD.csproj.Ge
 C:\Users\Alex\Documents\Visual Studio 2017\Projects\BD\BD\obj\Debug\BD.csproj.CoreCompileInputs.cache
 C:\Users\Alex\Documents\Visual Studio 2017\Projects\BD\BD\obj\Debug\BD.exe
 C:\Users\Alex\Documents\Visual Studio 2017\Projects\BD\BD\obj\Debug\BD.pdb
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Debug\BD.exe.config
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Debug\BD.exe
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Debug\BD.pdb
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.csprojAssemblyReference.cache
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddShoolGrade.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.LoginForm.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.MainForm.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.Properties.Resources.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.csproj.GenerateResource.cache
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.csproj.CoreCompileInputs.cache
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.exe
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.pdb
