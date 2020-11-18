@@ -35,9 +35,10 @@
             // 
             // LoginButton
             // 
-            this.LoginButton.Location = new System.Drawing.Point(213, 12);
+            this.LoginButton.Location = new System.Drawing.Point(142, 8);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(173, 58);
+            this.LoginButton.Size = new System.Drawing.Size(115, 38);
             this.LoginButton.TabIndex = 0;
             this.LoginButton.Text = "Войти";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -45,26 +46,30 @@
             // 
             // LoginTextBox
             // 
-            this.LoginTextBox.Location = new System.Drawing.Point(12, 12);
+            this.LoginTextBox.Location = new System.Drawing.Point(8, 8);
+            this.LoginTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoginTextBox.Name = "LoginTextBox";
-            this.LoginTextBox.Size = new System.Drawing.Size(185, 26);
+            this.LoginTextBox.Size = new System.Drawing.Size(125, 20);
             this.LoginTextBox.TabIndex = 1;
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(12, 44);
+            this.PasswordTextBox.Location = new System.Drawing.Point(8, 29);
+            this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(185, 26);
+            this.PasswordTextBox.PasswordChar = '?';
+            this.PasswordTextBox.Size = new System.Drawing.Size(125, 20);
             this.PasswordTextBox.TabIndex = 2;
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 89);
+            this.ClientSize = new System.Drawing.Size(265, 58);
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.LoginTextBox);
             this.Controls.Add(this.LoginButton);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "LoginForm";
             this.Text = "Вход";
             this.ResumeLayout(false);

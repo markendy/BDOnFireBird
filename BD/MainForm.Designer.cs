@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.DataGridView = new System.Windows.Forms.DataGridView();
+            this.AddShoolGradeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,11 +46,22 @@
             this.DataGridView.Size = new System.Drawing.Size(517, 129);
             this.DataGridView.TabIndex = 0;
             // 
+            // AddShoolGradeButton
+            // 
+            this.AddShoolGradeButton.Location = new System.Drawing.Point(13, 31);
+            this.AddShoolGradeButton.Name = "AddShoolGradeButton";
+            this.AddShoolGradeButton.Size = new System.Drawing.Size(151, 23);
+            this.AddShoolGradeButton.TabIndex = 1;
+            this.AddShoolGradeButton.Text = "Поставить оценку";
+            this.AddShoolGradeButton.UseVisualStyleBackColor = true;
+            this.AddShoolGradeButton.Click += new System.EventHandler(this.AddShoolGradeClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 292);
+            this.Controls.Add(this.AddShoolGradeButton);
             this.Controls.Add(this.DataGridView);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
@@ -63,5 +75,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DataGridView;
+        private System.Windows.Forms.Button AddShoolGradeButton;
     }
 }

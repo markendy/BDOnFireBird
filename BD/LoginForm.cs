@@ -12,19 +12,21 @@ namespace BD
 {
     public partial class LoginForm : Form
     {
-        public TextBox _LoginTextBox;
-        public TextBox _PasswordTextBox;
-
         private Action _loginHandler;
 
-        public LoginForm(MainForm mainForm)
+        MainForm mainForm;
+
+        public LoginForm(MainForm _mainForm)
         {
             InitializeComponent();
 
-            _LoginTextBox = this.LoginTextBox;
-            _PasswordTextBox = this.PasswordTextBox;
-            
+            mainForm = _mainForm;
             _loginHandler += mainForm.Logined;
+        }
+
+        ~LoginForm()
+        {
+            _loginHandler -= mainForm.Logined;
         }
 
         private void LoginButtonClick(object sender, EventArgs e)
@@ -41,8 +43,17 @@ namespace BD
 
         private bool Check()
         {
-            //check user on bd
+            if (LoginTextBox.Text != "")
+            {
+                return true;
+            }
+            //CHECK USER ON BD
             return false;
+        }
+
+        public string[] GetLoginPassword()
+        {
+            return new string[] { LoginTextBox.Text, PasswordTextBox.Text };
         }
     }
 }

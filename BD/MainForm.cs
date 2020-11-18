@@ -12,29 +12,44 @@ namespace BD
 {
     public partial class MainForm : Form
     {
-        private LoginForm loginForm;
-       
+        private LoginForm _loginForm;
+        private AddShoolGradeForm _addShoolGradeForm;
+
+
         public MainForm()
         {
             InitializeComponent();
 
-            loginForm = new LoginForm(this);
-            loginForm.Show();
+            _loginForm = new LoginForm(this);
+            _loginForm.Show();
         }
 
         public static User User { get; private set; }
 
         public void Logined()
         {
-            User = new User(loginForm._LoginTextBox.Text, loginForm._PasswordTextBox.Text);
+            User = new User(_loginForm.GetLoginPassword()[0], _loginForm.GetLoginPassword()[1]);
 
             Show();
-            loginForm.Close();
+            _loginForm.Close();
+        }
+
+        public void AddShoolGrade(string request)
+        {
+            //INSERTN VALUE IN DB
+            AddShoolGradeButton.Text = request;
+            _addShoolGradeForm.Close();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
             Visible = false;
+        }
+
+        private void AddShoolGradeClick(object sender, EventArgs e)
+        {
+            _addShoolGradeForm = new AddShoolGradeForm(AddShoolGrade);
+            _addShoolGradeForm.Show();
         }
     }
 }
