@@ -22,3 +22,4 @@ E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.csproj.CoreCompileIn
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.exe
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.pdb
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddShoolGradeForm.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddTeacherForm.resources

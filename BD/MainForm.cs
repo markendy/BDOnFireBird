@@ -14,32 +14,18 @@ namespace BD
     {
         private LoginForm _loginForm;
         private AddShoolGradeForm _addShoolGradeForm;
+        private AddTeacherForm _addTeacherForm;
 
 
         public MainForm()
         {
             InitializeComponent();
 
-            _loginForm = new LoginForm(this);
+            _loginForm = new LoginForm(Logined);
             _loginForm.Show();
         }
 
         public static User User { get; private set; }
-
-        public void Logined()
-        {
-            User = new User(_loginForm.GetLoginPassword()[0], _loginForm.GetLoginPassword()[1]);
-
-            Show();
-            _loginForm.Close();
-        }
-
-        public void AddShoolGrade(string request)
-        {
-            //INSERTN VALUE IN DB
-            AddShoolGradeButton.Text = request;
-            _addShoolGradeForm.Close();
-        }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
@@ -50,6 +36,40 @@ namespace BD
         {
             _addShoolGradeForm = new AddShoolGradeForm(AddShoolGrade);
             _addShoolGradeForm.Show();
+        }
+
+        private void AddTeacherButtonClick(object sender, EventArgs e)
+        {
+            _addTeacherForm = new AddTeacherForm(AddTeacher);
+            _addTeacherForm.Show();
+        }
+
+        //========================================================
+        // Outside method
+        //========================================================
+
+        private void Logined()
+        {
+            User = _loginForm.GetUser();
+
+            Show();
+            _loginForm.Dispose();
+            _loginForm.Close();
+        }
+
+        private void AddShoolGrade(string request)
+        {
+            //INSERTN VALUE IN DB
+            _addShoolGradeForm.Dispose();
+            _addShoolGradeForm.Close();
+        }
+
+        private void AddTeacher(Teacher teacher)
+        {
+            // Add to BD teacher
+
+            _addTeacherForm.Dispose();
+            _addTeacherForm.Close();
         }
     }
 }

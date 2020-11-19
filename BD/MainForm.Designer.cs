@@ -30,6 +30,7 @@
         {
             this.DataGridView = new System.Windows.Forms.DataGridView();
             this.AddShoolGradeButton = new System.Windows.Forms.Button();
+            this.AddTeacherButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             // 
             // AddShoolGradeButton
             // 
-            this.AddShoolGradeButton.Location = new System.Drawing.Point(13, 31);
+            this.AddShoolGradeButton.Location = new System.Drawing.Point(370, 12);
             this.AddShoolGradeButton.Name = "AddShoolGradeButton";
             this.AddShoolGradeButton.Size = new System.Drawing.Size(151, 23);
             this.AddShoolGradeButton.TabIndex = 1;
@@ -56,11 +57,22 @@
             this.AddShoolGradeButton.UseVisualStyleBackColor = true;
             this.AddShoolGradeButton.Click += new System.EventHandler(this.AddShoolGradeClick);
             // 
+            // AddTeacherButton
+            // 
+            this.AddTeacherButton.Location = new System.Drawing.Point(8, 12);
+            this.AddTeacherButton.Name = "AddTeacherButton";
+            this.AddTeacherButton.Size = new System.Drawing.Size(151, 23);
+            this.AddTeacherButton.TabIndex = 2;
+            this.AddTeacherButton.Text = "Добавить учителя";
+            this.AddTeacherButton.UseVisualStyleBackColor = true;
+            this.AddTeacherButton.Click += new System.EventHandler(this.AddTeacherButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 292);
+            this.Controls.Add(this.AddTeacherButton);
             this.Controls.Add(this.AddShoolGradeButton);
             this.Controls.Add(this.DataGridView);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -76,5 +88,6 @@
 
         private System.Windows.Forms.DataGridView DataGridView;
         private System.Windows.Forms.Button AddShoolGradeButton;
+        private System.Windows.Forms.Button AddTeacherButton;
     }
 }

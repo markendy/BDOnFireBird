@@ -10,23 +10,20 @@ using System.Windows.Forms;
 
 namespace BD
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : Form, IDisposable
     {
         private Action _loginHandler;
 
-        MainForm mainForm;
-
-        public LoginForm(MainForm _mainForm)
+        public LoginForm(Action logined)
         {
             InitializeComponent();
 
-            mainForm = _mainForm;
-            _loginHandler += mainForm.Logined;
+            _loginHandler += logined;
         }
-
-        ~LoginForm()
+        
+        public new void Dispose()
         {
-            _loginHandler -= mainForm.Logined;
+            _loginHandler = null;
         }
 
         private void LoginButtonClick(object sender, EventArgs e)
@@ -51,9 +48,9 @@ namespace BD
             return false;
         }
 
-        public string[] GetLoginPassword()
+        public User GetUser()
         {
-            return new string[] { LoginTextBox.Text, PasswordTextBox.Text };
-        }
+            return new User(LoginTextBox.Text, PasswordTextBox.Text);
+        }   
     }
 }

@@ -28,29 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ClassTextBox = new System.Windows.Forms.TextBox();
             this.ThingLabel = new System.Windows.Forms.Label();
             this.ClassLabel = new System.Windows.Forms.Label();
-            this.ThingTextBox = new System.Windows.Forms.TextBox();
             this.ShoolGradeLabel = new System.Windows.Forms.Label();
-            this.ShoolGradeTextBox = new System.Windows.Forms.TextBox();
             this.DateLabel = new System.Windows.Forms.Label();
-            this.DateTextBox = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.CanelButton = new System.Windows.Forms.Button();
             this.StudentaNameLabel = new System.Windows.Forms.Label();
-            this.StudentNameTextBox = new System.Windows.Forms.TextBox();
-            this.NumberOfLessonTextBox = new System.Windows.Forms.TextBox();
-            this.NumberOfLessonLabel = new System.Windows.Forms.Label();
+            this.ThingComboBox = new System.Windows.Forms.ComboBox();
+            this.ClassComboBox = new System.Windows.Forms.ComboBox();
+            this.ShoolGradeLabelComboBox = new System.Windows.Forms.ComboBox();
+            this.Calendar = new System.Windows.Forms.MonthCalendar();
+            this.DataTextBox = new System.Windows.Forms.TextBox();
+            this.StudentComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // ClassTextBox
-            // 
-            this.ClassTextBox.Location = new System.Drawing.Point(91, 40);
-            this.ClassTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ClassTextBox.Name = "ClassTextBox";
-            this.ClassTextBox.Size = new System.Drawing.Size(127, 20);
-            this.ClassTextBox.TabIndex = 0;
             // 
             // ThingLabel
             // 
@@ -72,14 +63,6 @@
             this.ClassLabel.TabIndex = 3;
             this.ClassLabel.Text = "Класс";
             // 
-            // ThingTextBox
-            // 
-            this.ThingTextBox.Location = new System.Drawing.Point(91, 12);
-            this.ThingTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ThingTextBox.Name = "ThingTextBox";
-            this.ThingTextBox.Size = new System.Drawing.Size(127, 20);
-            this.ThingTextBox.TabIndex = 4;
-            // 
             // ShoolGradeLabel
             // 
             this.ShoolGradeLabel.AutoSize = true;
@@ -89,14 +72,6 @@
             this.ShoolGradeLabel.Size = new System.Drawing.Size(45, 13);
             this.ShoolGradeLabel.TabIndex = 5;
             this.ShoolGradeLabel.Text = "Оценка";
-            // 
-            // ShoolGradeTextBox
-            // 
-            this.ShoolGradeTextBox.Location = new System.Drawing.Point(91, 100);
-            this.ShoolGradeTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ShoolGradeTextBox.Name = "ShoolGradeTextBox";
-            this.ShoolGradeTextBox.Size = new System.Drawing.Size(127, 20);
-            this.ShoolGradeTextBox.TabIndex = 6;
             // 
             // DateLabel
             // 
@@ -108,31 +83,23 @@
             this.DateLabel.TabIndex = 7;
             this.DateLabel.Text = "Дата";
             // 
-            // DateTextBox
-            // 
-            this.DateTextBox.Location = new System.Drawing.Point(91, 130);
-            this.DateTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.DateTextBox.Name = "DateTextBox";
-            this.DateTextBox.Size = new System.Drawing.Size(127, 20);
-            this.DateTextBox.TabIndex = 8;
-            // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(12, 187);
+            this.AddButton.Location = new System.Drawing.Point(11, 164);
             this.AddButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(204, 24);
+            this.AddButton.Size = new System.Drawing.Size(195, 24);
             this.AddButton.TabIndex = 9;
-            this.AddButton.Text = "Добавить";
+            this.AddButton.Text = "Поставить";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButtonClick);
             // 
             // CanelButton
             // 
-            this.CanelButton.Location = new System.Drawing.Point(12, 214);
+            this.CanelButton.Location = new System.Drawing.Point(210, 164);
             this.CanelButton.Margin = new System.Windows.Forms.Padding(2);
             this.CanelButton.Name = "CanelButton";
-            this.CanelButton.Size = new System.Drawing.Size(204, 24);
+            this.CanelButton.Size = new System.Drawing.Size(66, 24);
             this.CanelButton.TabIndex = 10;
             this.CanelButton.Text = "Отменить";
             this.CanelButton.UseVisualStyleBackColor = true;
@@ -144,78 +111,122 @@
             this.StudentaNameLabel.Location = new System.Drawing.Point(9, 73);
             this.StudentaNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.StudentaNameLabel.Name = "StudentaNameLabel";
-            this.StudentaNameLabel.Size = new System.Drawing.Size(81, 13);
+            this.StudentaNameLabel.Size = new System.Drawing.Size(44, 13);
             this.StudentaNameLabel.TabIndex = 12;
-            this.StudentaNameLabel.Text = "Фамилия Имя";
+            this.StudentaNameLabel.Text = "Ученик";
             // 
-            // StudentNameTextBox
+            // ThingComboBox
             // 
-            this.StudentNameTextBox.Location = new System.Drawing.Point(91, 71);
-            this.StudentNameTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.StudentNameTextBox.Name = "StudentNameTextBox";
-            this.StudentNameTextBox.Size = new System.Drawing.Size(127, 20);
-            this.StudentNameTextBox.TabIndex = 11;
+            this.ThingComboBox.FormattingEnabled = true;
+            this.ThingComboBox.Items.AddRange(new object[] {
+            "Физка"});
+            this.ThingComboBox.Location = new System.Drawing.Point(91, 9);
+            this.ThingComboBox.Name = "ThingComboBox";
+            this.ThingComboBox.Size = new System.Drawing.Size(186, 21);
+            this.ThingComboBox.TabIndex = 15;
+            this.ThingComboBox.SelectedIndexChanged += new System.EventHandler(this.ThingComboBoxSelectedIndexChanged);
             // 
-            // NumberOfLessonTextBox
+            // ClassComboBox
             // 
-            this.NumberOfLessonTextBox.Location = new System.Drawing.Point(91, 159);
-            this.NumberOfLessonTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.NumberOfLessonTextBox.Name = "NumberOfLessonTextBox";
-            this.NumberOfLessonTextBox.Size = new System.Drawing.Size(127, 20);
-            this.NumberOfLessonTextBox.TabIndex = 14;
+            this.ClassComboBox.FormattingEnabled = true;
+            this.ClassComboBox.Items.AddRange(new object[] {
+            "11А"});
+            this.ClassComboBox.Location = new System.Drawing.Point(91, 39);
+            this.ClassComboBox.Name = "ClassComboBox";
+            this.ClassComboBox.Size = new System.Drawing.Size(186, 21);
+            this.ClassComboBox.TabIndex = 16;
+            this.ClassComboBox.Visible = false;
+            this.ClassComboBox.SelectedIndexChanged += new System.EventHandler(this.ClassComboBoxSelectedIndexChanged);
             // 
-            // NumberOfLessonLabel
+            // ShoolGradeLabelComboBox
             // 
-            this.NumberOfLessonLabel.AutoSize = true;
-            this.NumberOfLessonLabel.Location = new System.Drawing.Point(9, 161);
-            this.NumberOfLessonLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.NumberOfLessonLabel.Name = "NumberOfLessonLabel";
-            this.NumberOfLessonLabel.Size = new System.Drawing.Size(73, 13);
-            this.NumberOfLessonLabel.TabIndex = 13;
-            this.NumberOfLessonLabel.Text = "Номер урока";
+            this.ShoolGradeLabelComboBox.FormattingEnabled = true;
+            this.ShoolGradeLabelComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.ShoolGradeLabelComboBox.Location = new System.Drawing.Point(91, 99);
+            this.ShoolGradeLabelComboBox.Name = "ShoolGradeLabelComboBox";
+            this.ShoolGradeLabelComboBox.Size = new System.Drawing.Size(185, 21);
+            this.ShoolGradeLabelComboBox.TabIndex = 17;
+            this.ShoolGradeLabelComboBox.Visible = false;
+            this.ShoolGradeLabelComboBox.SelectedIndexChanged += new System.EventHandler(this.ShoolGradeLabelComboBoxSelectedIndexChanged);
             // 
-            // AddShoolGrade
+            // Calendar
+            // 
+            this.Calendar.Location = new System.Drawing.Point(262, 175);
+            this.Calendar.MaxSelectionCount = 1;
+            this.Calendar.Name = "Calendar";
+            this.Calendar.TabIndex = 20;
+            this.Calendar.TodayDate = new System.DateTime(2020, 11, 28, 0, 0, 0, 0);
+            this.Calendar.Visible = false;
+            this.Calendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.CalendarDateSelected);
+            // 
+            // DataTextBox
+            // 
+            this.DataTextBox.Location = new System.Drawing.Point(91, 129);
+            this.DataTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.DataTextBox.Name = "DataTextBox";
+            this.DataTextBox.ReadOnly = true;
+            this.DataTextBox.Size = new System.Drawing.Size(185, 20);
+            this.DataTextBox.TabIndex = 19;
+            this.DataTextBox.Visible = false;
+            this.DataTextBox.Click += new System.EventHandler(this.DataTextBoxClick);
+            this.DataTextBox.TextChanged += new System.EventHandler(this.DataTextBoxTextChanged);
+            // 
+            // StudentComboBox
+            // 
+            this.StudentComboBox.FormattingEnabled = true;
+            this.StudentComboBox.Items.AddRange(new object[] {
+            "Петров Борисов"});
+            this.StudentComboBox.Location = new System.Drawing.Point(91, 70);
+            this.StudentComboBox.Name = "StudentComboBox";
+            this.StudentComboBox.Size = new System.Drawing.Size(186, 21);
+            this.StudentComboBox.TabIndex = 21;
+            this.StudentComboBox.Visible = false;
+            this.StudentComboBox.SelectedIndexChanged += new System.EventHandler(this.StudentComboBoxSelectedIndexChanged);
+            // 
+            // AddShoolGradeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 270);
-            this.Controls.Add(this.NumberOfLessonTextBox);
-            this.Controls.Add(this.NumberOfLessonLabel);
+            this.ClientSize = new System.Drawing.Size(289, 202);
+            this.Controls.Add(this.Calendar);
             this.Controls.Add(this.StudentaNameLabel);
-            this.Controls.Add(this.StudentNameTextBox);
             this.Controls.Add(this.CanelButton);
             this.Controls.Add(this.AddButton);
-            this.Controls.Add(this.DateTextBox);
             this.Controls.Add(this.DateLabel);
-            this.Controls.Add(this.ShoolGradeTextBox);
             this.Controls.Add(this.ShoolGradeLabel);
-            this.Controls.Add(this.ThingTextBox);
             this.Controls.Add(this.ClassLabel);
             this.Controls.Add(this.ThingLabel);
-            this.Controls.Add(this.ClassTextBox);
+            this.Controls.Add(this.DataTextBox);
+            this.Controls.Add(this.ShoolGradeLabelComboBox);
+            this.Controls.Add(this.StudentComboBox);
+            this.Controls.Add(this.ClassComboBox);
+            this.Controls.Add(this.ThingComboBox);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "AddShoolGrade";
-            this.Text = "AddShoolGrade";
+            this.Name = "AddShoolGradeForm";
+            this.Text = "Поставить оценку";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox ClassTextBox;
         private System.Windows.Forms.Label ThingLabel;
         private System.Windows.Forms.Label ClassLabel;
-        private System.Windows.Forms.TextBox ThingTextBox;
         private System.Windows.Forms.Label ShoolGradeLabel;
-        private System.Windows.Forms.TextBox ShoolGradeTextBox;
         private System.Windows.Forms.Label DateLabel;
-        private System.Windows.Forms.TextBox DateTextBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button CanelButton;
         private System.Windows.Forms.Label StudentaNameLabel;
-        private System.Windows.Forms.TextBox StudentNameTextBox;
-        private System.Windows.Forms.TextBox NumberOfLessonTextBox;
-        private System.Windows.Forms.Label NumberOfLessonLabel;
+        private System.Windows.Forms.ComboBox ThingComboBox;
+        private System.Windows.Forms.ComboBox ClassComboBox;
+        private System.Windows.Forms.ComboBox ShoolGradeLabelComboBox;
+        private System.Windows.Forms.MonthCalendar Calendar;
+        private System.Windows.Forms.TextBox DataTextBox;
+        private System.Windows.Forms.ComboBox StudentComboBox;
     }
 }
