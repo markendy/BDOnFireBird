@@ -102,7 +102,9 @@
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.LoginTextBox);
             this.Controls.Add(this.LoginButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.Text = "Вход";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

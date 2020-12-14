@@ -75,7 +75,9 @@
             this.Controls.Add(this.AddTeacherButton);
             this.Controls.Add(this.AddShoolGradeButton);
             this.Controls.Add(this.DataGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.Shown += new System.EventHandler(this.MainForm_Shown);

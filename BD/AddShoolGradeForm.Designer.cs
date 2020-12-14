@@ -33,7 +33,6 @@
             this.ShoolGradeLabel = new System.Windows.Forms.Label();
             this.DateLabel = new System.Windows.Forms.Label();
             this.AddButton = new System.Windows.Forms.Button();
-            this.CanelButton = new System.Windows.Forms.Button();
             this.StudentaNameLabel = new System.Windows.Forms.Label();
             this.ThingComboBox = new System.Windows.Forms.ComboBox();
             this.ClassComboBox = new System.Windows.Forms.ComboBox();
@@ -88,22 +87,11 @@
             this.AddButton.Location = new System.Drawing.Point(11, 164);
             this.AddButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(195, 24);
+            this.AddButton.Size = new System.Drawing.Size(265, 24);
             this.AddButton.TabIndex = 9;
             this.AddButton.Text = "Поставить";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButtonClick);
-            // 
-            // CanelButton
-            // 
-            this.CanelButton.Location = new System.Drawing.Point(210, 164);
-            this.CanelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.CanelButton.Name = "CanelButton";
-            this.CanelButton.Size = new System.Drawing.Size(66, 24);
-            this.CanelButton.TabIndex = 10;
-            this.CanelButton.Text = "Отменить";
-            this.CanelButton.UseVisualStyleBackColor = true;
-            this.CanelButton.Click += new System.EventHandler(this.CanelButtonClick);
             // 
             // StudentaNameLabel
             // 
@@ -135,7 +123,6 @@
             this.ClassComboBox.Name = "ClassComboBox";
             this.ClassComboBox.Size = new System.Drawing.Size(186, 21);
             this.ClassComboBox.TabIndex = 16;
-            this.ClassComboBox.Visible = false;
             this.ClassComboBox.SelectedIndexChanged += new System.EventHandler(this.ClassComboBoxSelectedIndexChanged);
             // 
             // ShoolGradeLabelComboBox
@@ -151,7 +138,6 @@
             this.ShoolGradeLabelComboBox.Name = "ShoolGradeLabelComboBox";
             this.ShoolGradeLabelComboBox.Size = new System.Drawing.Size(185, 21);
             this.ShoolGradeLabelComboBox.TabIndex = 17;
-            this.ShoolGradeLabelComboBox.Visible = false;
             this.ShoolGradeLabelComboBox.SelectedIndexChanged += new System.EventHandler(this.ShoolGradeLabelComboBoxSelectedIndexChanged);
             // 
             // Calendar
@@ -172,7 +158,6 @@
             this.DataTextBox.ReadOnly = true;
             this.DataTextBox.Size = new System.Drawing.Size(185, 20);
             this.DataTextBox.TabIndex = 19;
-            this.DataTextBox.Visible = false;
             this.DataTextBox.Click += new System.EventHandler(this.DataTextBoxClick);
             this.DataTextBox.TextChanged += new System.EventHandler(this.DataTextBoxTextChanged);
             // 
@@ -185,7 +170,6 @@
             this.StudentComboBox.Name = "StudentComboBox";
             this.StudentComboBox.Size = new System.Drawing.Size(186, 21);
             this.StudentComboBox.TabIndex = 21;
-            this.StudentComboBox.Visible = false;
             this.StudentComboBox.SelectedIndexChanged += new System.EventHandler(this.StudentComboBoxSelectedIndexChanged);
             // 
             // AddShoolGradeForm
@@ -195,7 +179,6 @@
             this.ClientSize = new System.Drawing.Size(289, 202);
             this.Controls.Add(this.Calendar);
             this.Controls.Add(this.StudentaNameLabel);
-            this.Controls.Add(this.CanelButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DateLabel);
             this.Controls.Add(this.ShoolGradeLabel);
@@ -206,7 +189,9 @@
             this.Controls.Add(this.StudentComboBox);
             this.Controls.Add(this.ClassComboBox);
             this.Controls.Add(this.ThingComboBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "AddShoolGradeForm";
             this.Text = "Поставить оценку";
             this.ResumeLayout(false);
@@ -220,7 +205,6 @@
         private System.Windows.Forms.Label ShoolGradeLabel;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button CanelButton;
         private System.Windows.Forms.Label StudentaNameLabel;
         private System.Windows.Forms.ComboBox ThingComboBox;
         private System.Windows.Forms.ComboBox ClassComboBox;

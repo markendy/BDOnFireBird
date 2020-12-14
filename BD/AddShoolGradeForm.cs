@@ -28,14 +28,9 @@ namespace BD
             _addShoolGradeHandler("REQUEST");
         }
 
-        private void CanelButtonClick(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void CalendarDateSelected(object sender, DateRangeEventArgs e)
         {
-           DataTextBox.Text = Calendar.SelectionRange.Start.ToString("dd.MM.yyyy");
+            DataTextBox.Text = Calendar.SelectionRange.Start.ToString("dd.MM.yyyy");
             Calendar.Visible = false;
         }
 
@@ -53,22 +48,22 @@ namespace BD
         private void ThingComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             // do something
-            ClassComboBox.Visible = true;
+            //ClassComboBox.Visible = true;
         }
 
         private void ShoolGradeLabelComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            DataTextBox.Visible = true;
+            //DataTextBox.Visible = true;
         }
 
         private void ClassComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            StudentComboBox.Visible = true;
+            //StudentComboBox.Visible = true;
         }
 
         private void StudentComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            ShoolGradeLabelComboBox.Visible = true;
+            //ShoolGradeLabelComboBox.Visible = true;
         }
 
         private void DataTextBoxTextChanged(object sender, EventArgs e)

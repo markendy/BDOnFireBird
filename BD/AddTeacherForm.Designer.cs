@@ -37,7 +37,6 @@
             this.ThingComboBox = new System.Windows.Forms.ComboBox();
             this.CabinetLabelComboBox = new System.Windows.Forms.ComboBox();
             this.AddButton = new System.Windows.Forms.Button();
-            this.CanelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TeacherFullNameLabelTextBox
@@ -108,27 +107,17 @@
             // 
             this.AddButton.Location = new System.Drawing.Point(12, 150);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(200, 23);
+            this.AddButton.Size = new System.Drawing.Size(336, 23);
             this.AddButton.TabIndex = 8;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButtonClick);
-            // 
-            // CanelButton
-            // 
-            this.CanelButton.Location = new System.Drawing.Point(218, 150);
-            this.CanelButton.Name = "CanelButton";
-            this.CanelButton.Size = new System.Drawing.Size(132, 23);
-            this.CanelButton.TabIndex = 9;
-            this.CanelButton.Text = "Отменить";
-            this.CanelButton.UseVisualStyleBackColor = true;
             // 
             // AddTeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 185);
-            this.Controls.Add(this.CanelButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.CabinetLabelComboBox);
             this.Controls.Add(this.ThingComboBox);
@@ -138,6 +127,8 @@
             this.Controls.Add(this.ThingTextBox);
             this.Controls.Add(this.TeacherFullNameLabel);
             this.Controls.Add(this.TeacherFullNameLabelTextBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "AddTeacherForm";
             this.Text = "AddTeacher";
             this.ResumeLayout(false);
@@ -156,6 +147,5 @@
         private System.Windows.Forms.ComboBox ThingComboBox;
         private System.Windows.Forms.ComboBox CabinetLabelComboBox;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button CanelButton;
     }
 }
