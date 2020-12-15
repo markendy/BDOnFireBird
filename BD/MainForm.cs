@@ -36,12 +36,57 @@ namespace BD
             Visible = false;
         }
 
+        private void CreateRowForTeacher()
+        {
+            this.DataGridView.Rows.Clear();
+            this.DataGridView.Columns.Clear();
+
+            var idColumn = new DataGridViewColumn();
+            idColumn.HeaderText = "ID";
+            idColumn.Name = "ID";
+            idColumn.ReadOnly = true;
+            idColumn.CellTemplate = new DataGridViewTextBoxCell();
+
+            var nameColumn = new DataGridViewColumn();
+            nameColumn.HeaderText = "Имя";
+            nameColumn.Name = "NAME";
+            nameColumn.ReadOnly = true;
+            nameColumn.SortMode = DataGridViewColumnSortMode.Automatic;
+            nameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            nameColumn.CellTemplate = new DataGridViewTextBoxCell();
+
+            DataGridView.Columns.Add(idColumn);
+            DataGridView.Columns.Add(nameColumn);
+
+            DataGridView.AllowUserToAddRows = false;
+
+            ShowMainTable();
+        }
+
+        private void ShowMainTable()
+        {
+            foreach (var str in _answer)
+            {
+                DataGridView.Rows.Add();
+                foreach (var dic in str)
+                {
+                    DataGridView[dic.Key.ToString(), DataGridView.Rows.Count - 1].Value = dic.Value;
+                }
+            }
+        }
+
         private void AddShoolGradeClick(object sender, EventArgs e)
         {
-            _dataBase.DUIRequest("INSERT INTO TEACHER VALUES(1, 'AAA');", true);
+            //BEGIN TEST
+            _dataBase.DUIRequest("DELETE FROM TEACHER;", true);
+            _dataBase.DUIRequest("INSERT INTO TEACHER VALUES(1, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');", true);
+            _dataBase.DUIRequest("INSERT INTO TEACHER VALUES(2, 'BBB');", true);
+            _dataBase.DUIRequest("INSERT INTO TEACHER VALUES(3, 'CCC');", true);
             _answer = _dataBase.SelectRequest("SELECT * FROM TEACHER");
-            _dataBase.DUIRequest("DELETE FROM TEACHER WHERE ID = 1", true);
+            CreateRowForTeacher();
+            _dataBase.DUIRequest("DELETE FROM TEACHER;", true);
             _answer = _dataBase.SelectRequest("SELECT * FROM TEACHER");
+            //END TEST
             _addShoolGradeForm = new AddShoolGradeForm(AddShoolGrade);
             _addShoolGradeForm.Show();
         }

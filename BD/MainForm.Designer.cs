@@ -44,12 +44,12 @@
             this.DataGridView.Name = "DataGridView";
             this.DataGridView.ReadOnly = true;
             this.DataGridView.RowTemplate.Height = 28;
-            this.DataGridView.Size = new System.Drawing.Size(517, 129);
+            this.DataGridView.Size = new System.Drawing.Size(1283, 444);
             this.DataGridView.TabIndex = 0;
             // 
             // AddShoolGradeButton
             // 
-            this.AddShoolGradeButton.Location = new System.Drawing.Point(370, 12);
+            this.AddShoolGradeButton.Location = new System.Drawing.Point(8, 41);
             this.AddShoolGradeButton.Name = "AddShoolGradeButton";
             this.AddShoolGradeButton.Size = new System.Drawing.Size(151, 23);
             this.AddShoolGradeButton.TabIndex = 1;
@@ -71,7 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 292);
+            this.ClientSize = new System.Drawing.Size(1302, 610);
             this.Controls.Add(this.AddTeacherButton);
             this.Controls.Add(this.AddShoolGradeButton);
             this.Controls.Add(this.DataGridView);
