@@ -12,20 +12,23 @@ namespace BD
 {
     public partial class AddShoolGradeForm : Form
     {
-        public delegate void SchoolGradeDelegate(string request);
-        private event SchoolGradeDelegate _addShoolGradeHandler;
+        private event MainForm.RequestrDelegate _addSchoolGradeHandler;
 
-        public AddShoolGradeForm(SchoolGradeDelegate addSchoolGrade)
+        public AddShoolGradeForm(MainForm.RequestrDelegate _addSchoolGradeDelegate)
         {
             InitializeComponent();
-         
-            _addShoolGradeHandler += addSchoolGrade;
+
+            MainForm.DataBase.SetComboBox(ThingComboBox, "THING", "NAME");
+            MainForm.DataBase.SetComboBox(ClassComboBox, "CLASS", "NAME");
+            MainForm.DataBase.SetComboBox(StudentComboBox, "STUDENT", "LAST_NAME");
+
+            _addSchoolGradeHandler += _addSchoolGradeDelegate;
         }      
 
         private void AddButtonClick(object sender, EventArgs e)
         {
             //INSERT VALUE
-            _addShoolGradeHandler("REQUEST");
+            _addSchoolGradeHandler("REQUEST");
         }
 
         private void CalendarDateSelected(object sender, DateRangeEventArgs e)

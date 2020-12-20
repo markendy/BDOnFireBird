@@ -14,18 +14,18 @@ namespace BD
     public partial class AddTeacherForm : Form, IDisposable
     {
         public delegate void TeacherDelegate(Teacher teacher);
-        private event TeacherDelegate _addTeacher;
+        private event TeacherDelegate _addTeacherHandler;
 
         public AddTeacherForm(TeacherDelegate addTeacher)
         {
             InitializeComponent();
 
-            _addTeacher += addTeacher;
+            _addTeacherHandler += addTeacher;
         }
 
         public new void Dispose()
         {
-            _addTeacher = null;
+            _addTeacherHandler = null;
         }
 
         private void AddButtonClick(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace BD
                 MessageBox.Show("Неккоректно заполнен предмет");
             }
             else
-                _addTeacher(new Teacher(
+                _addTeacherHandler(new Teacher(
                     TeacherFullNameLabelTextBox.Text.Split()[0],
                     TeacherFullNameLabelTextBox.Text.Split()[1],
                     TeacherFullNameLabelTextBox.Text.Split()[2],                    

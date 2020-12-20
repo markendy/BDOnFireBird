@@ -16,14 +16,20 @@ namespace BD
         private LoginForm _loginForm;
         private AddShoolGradeForm _addShoolGradeForm;
         private AddTeacherForm _addTeacherForm;
-        private DataBaseAdapter _dataBase;
+        private Quest1Form _quest1Form;
+        private AddClassForm _addClassForm;
+        private AddStudentForm _addStudentForm;
+
+        public static DataBaseAdapter DataBase;
         private TableView _tableView;
+
+        public delegate void RequestrDelegate(string request);
 
         public MainForm()
         {
             InitializeComponent();
 
-            _dataBase = new DataBaseAdapter();
+            DataBase = new DataBaseAdapter();
             _tableView = new TableView(DataGridView);
 
             //_tableView.CreateMainTableView(_dataBase.SelectRequest("SELECT * FROM TEACHER;"));
@@ -39,7 +45,11 @@ namespace BD
         private void MainForm_Shown(object sender, EventArgs e)
         {
             Visible = false;
-        }      
+        }
+
+        //========================================================
+        // Buttons Click
+        //========================================================
 
         private void AddShoolGradeClick(object sender, EventArgs e)
         {
@@ -53,20 +63,44 @@ namespace BD
             _addTeacherForm.Show();
         }
 
+        private void Quest1Button_Click(object sender, EventArgs e)
+        {
+            _quest1Form = new Quest1Form(Quest1);
+            _quest1Form.Show();
+        }
+
+        private void ClassAddButton_Click(object sender, EventArgs e)
+        {
+            _addClassForm = new AddClassForm(AddClass);
+            _addClassForm.Show();
+        }
+
+        private void StudentAddButton_Click(object sender, EventArgs e)
+        {
+            _addStudentForm = new AddStudentForm(AddStudent);
+            _addStudentForm.Show();
+        }
+
         //========================================================
         // Outside method
         //========================================================
 
+        private void Quest1(string request)
+        {
+            _tableView.CreateMainTableView(DataBase.SelectRequest(request));
+
+            CloseWindow(_quest1Form);
+        }
+
         private void Logined()
         {
             User = _loginForm.GetUser();
-            var login = _dataBase.CheckUser(User);
+            var login = DataBase.CheckUser(User);
             if (login != "")
             {
-                _dataBase.Connect(login);
+                DataBase.Connect(login);
                 Show();
-                _loginForm.Dispose();
-                _loginForm.Close();
+                CloseWindow(_loginForm);
             }
             else
             {
@@ -77,22 +111,35 @@ namespace BD
         private void AddShoolGrade(string request)
         {
             //INSERTN VALUE IN DB
-            _addShoolGradeForm.Dispose();
-            _addShoolGradeForm.Close();
+            CloseWindow(_addShoolGradeForm);
         }
 
         private void AddTeacher(Teacher teacher)
         {
-            var lastId = _dataBase.InsertWithReturnId(
+            var lastId = DataBase.InsertWithReturnId(
                 $"INSERT INTO TEACHER VALUES(null, '{teacher.FirstName}', '{teacher.MiddleName}', '{teacher.LastName}') RETURNING ID;"
                 , true);
-            _dataBase.DUIRequest(
+            DataBase.DUIRequest(
                 $"INSERT INTO THING VALUES(null, '{teacher.Thing}', {lastId});", 
                 true);
-            _dataBase.DUIRequest(
+            DataBase.DUIRequest(
                 $"INSERT INTO CABINET VALUES(null, {teacher.Cabinet}, {lastId});",
                 true);
             CloseWindow(_addTeacherForm);
+        }
+
+        private void AddClass(string request)
+        {
+            DataBase.InsertWithReturnId(request, true);
+
+            CloseWindow(_addClassForm);
+        }
+
+        private void AddStudent(string request)
+        {
+            DataBase.DUIRequest(request, true);
+
+            CloseWindow(_addStudentForm);
         }
 
         private void CloseWindow(Form form)

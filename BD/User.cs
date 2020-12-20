@@ -8,11 +8,6 @@ namespace BD
 {
     public class User
     {
-        public User()
-        {
-
-        }
-
         public User(string username, string pass)
         {
             UserName = username;

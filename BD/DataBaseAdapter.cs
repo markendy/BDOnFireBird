@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BD
 {
@@ -22,6 +23,8 @@ namespace BD
 
         public void Connect(string user, string role = "OBS")
         {
+            if (user == "teacher")
+                role = "EDITOR";
             FbConnectionStringBuilder fb_cons = new FbConnectionStringBuilder();
             fb_cons.Charset = "UTF8";
             fb_cons.UserID = user;
@@ -47,6 +50,31 @@ namespace BD
                 transaction.Rollback();
             _fbCon.Close();
             return lastId;
+        }
+
+        public void SetComboBox(ComboBox comboBox, string table, string column)
+        {
+            var items = SelectRequest($"SELECT ID, {column} FROM {table}");
+            var listDic = new Dictionary<object, object>();
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    List<object> vl = new List<object>();
+                    foreach (var dic in item)
+                    {
+                        vl.Add(dic.Value);
+                    }                    
+                    listDic[vl[0]] = vl[1];
+                }                
+                comboBox.DataSource = new BindingSource(listDic, null);
+                comboBox.DisplayMember = "Value";
+                comboBox.ValueMember = "Value";
+            }
+            else
+            {
+                MessageBox.Show("Одна из выборок пуста");
+            }
         }
 
         public void DUIRequest(string request, bool isCommit)
