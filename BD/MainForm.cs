@@ -17,14 +17,19 @@ namespace BD
         private AddShoolGradeForm _addShoolGradeForm;
         private AddTeacherForm _addTeacherForm;
         private DataBaseAdapter _dataBase;
-        private List<Dictionary<object, object>> _answer;
+        private TableView _tableView;
 
         public MainForm()
         {
             InitializeComponent();
 
             _dataBase = new DataBaseAdapter();
+            _tableView = new TableView(DataGridView);
 
+            //_tableView.CreateMainTableView(_dataBase.SelectRequest("SELECT * FROM TEACHER;"));
+
+            // SYSTEM :: _tableView.CreateMainTableView(_dataBase.SelectRequest("select * from sec$users;"));
+            
             _loginForm = new LoginForm(Logined);
             _loginForm.Show();
         }
@@ -34,59 +39,10 @@ namespace BD
         private void MainForm_Shown(object sender, EventArgs e)
         {
             Visible = false;
-        }
-
-        private void CreateRowForTeacher()
-        {
-            this.DataGridView.Rows.Clear();
-            this.DataGridView.Columns.Clear();
-
-            var idColumn = new DataGridViewColumn();
-            idColumn.HeaderText = "ID";
-            idColumn.Name = "ID";
-            idColumn.ReadOnly = true;
-            idColumn.CellTemplate = new DataGridViewTextBoxCell();
-
-            var nameColumn = new DataGridViewColumn();
-            nameColumn.HeaderText = "Имя";
-            nameColumn.Name = "NAME";
-            nameColumn.ReadOnly = true;
-            nameColumn.SortMode = DataGridViewColumnSortMode.Automatic;
-            nameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            nameColumn.CellTemplate = new DataGridViewTextBoxCell();
-
-            DataGridView.Columns.Add(idColumn);
-            DataGridView.Columns.Add(nameColumn);
-
-            DataGridView.AllowUserToAddRows = false;
-
-            ShowMainTable();
-        }
-
-        private void ShowMainTable()
-        {
-            foreach (var str in _answer)
-            {
-                DataGridView.Rows.Add();
-                foreach (var dic in str)
-                {
-                    DataGridView[dic.Key.ToString(), DataGridView.Rows.Count - 1].Value = dic.Value;
-                }
-            }
-        }
+        }      
 
         private void AddShoolGradeClick(object sender, EventArgs e)
         {
-            //BEGIN TEST
-            _dataBase.DUIRequest("DELETE FROM TEACHER;", true);
-            _dataBase.DUIRequest("INSERT INTO TEACHER VALUES(1, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');", true);
-            _dataBase.DUIRequest("INSERT INTO TEACHER VALUES(2, 'BBB');", true);
-            _dataBase.DUIRequest("INSERT INTO TEACHER VALUES(3, 'CCC');", true);
-            _answer = _dataBase.SelectRequest("SELECT * FROM TEACHER");
-            CreateRowForTeacher();
-            _dataBase.DUIRequest("DELETE FROM TEACHER;", true);
-            _answer = _dataBase.SelectRequest("SELECT * FROM TEACHER");
-            //END TEST
             _addShoolGradeForm = new AddShoolGradeForm(AddShoolGrade);
             _addShoolGradeForm.Show();
         }
@@ -104,10 +60,18 @@ namespace BD
         private void Logined()
         {
             User = _loginForm.GetUser();
-
-            Show();
-            _loginForm.Dispose();
-            _loginForm.Close();
+            var login = _dataBase.CheckUser(User);
+            if (login != "")
+            {
+                _dataBase.Connect(login);
+                Show();
+                _loginForm.Dispose();
+                _loginForm.Close();
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль");
+            }
         }
 
         private void AddShoolGrade(string request)
@@ -119,10 +83,22 @@ namespace BD
 
         private void AddTeacher(Teacher teacher)
         {
-            // Add to BD teacher
+            var lastId = _dataBase.InsertWithReturnId(
+                $"INSERT INTO TEACHER VALUES(null, '{teacher.FirstName}', '{teacher.MiddleName}', '{teacher.LastName}') RETURNING ID;"
+                , true);
+            _dataBase.DUIRequest(
+                $"INSERT INTO THING VALUES(null, '{teacher.Thing}', {lastId});", 
+                true);
+            _dataBase.DUIRequest(
+                $"INSERT INTO CABINET VALUES(null, {teacher.Cabinet}, {lastId});",
+                true);
+            CloseWindow(_addTeacherForm);
+        }
 
-            _addTeacherForm.Dispose();
-            _addTeacherForm.Close();
+        private void CloseWindow(Form form)
+        {
+            form.Dispose();
+            form.Close();
         }
     }
 }

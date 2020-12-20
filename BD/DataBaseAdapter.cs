@@ -11,23 +11,49 @@ namespace BD
     {
         private FbConnection _fbCon;
 
-        public DataBaseAdapter()
+        public string CheckUser(User user)
+        {
+            Connect("SYSDBA");
+            var type = InsertWithReturnId($"SELECT TYPE FROM PERSONAL WHERE LOGIN = '{user.UserName}' AND PASSWORD = '{user.Password}';", true);
+            if (type == null)
+                return "";
+            return type.ToString();
+        }
+
+        public void Connect(string user, string role = "OBS")
         {
             FbConnectionStringBuilder fb_cons = new FbConnectionStringBuilder();
-            fb_cons.Charset = "WIN1251"; //кодировка
-            fb_cons.UserID = "SYSDBA";
+            fb_cons.Charset = "UTF8";
+            fb_cons.UserID = user;
+            fb_cons.Role = role;
+            fb_cons.WireCrypt = FbWireCrypt.Enabled;
+            fb_cons.DataSource = "localhost";
             fb_cons.Password = "123123";
-            fb_cons.Database = @"E:\Comp 5.0\Life on vuz\VUZ\Semestr 5\BD\FireBirdEmbedx64\SHOOLK";
-            fb_cons.ServerType = FbServerType.Embedded;
-            _fbCon = new FbConnection(fb_cons.ToString());
+            fb_cons.Database = @"E:\Comp 5.0\Life on vuz\VUZ\Semestr 5\BD\FireBirdEmbedx64\SHOOLK2";
+            fb_cons.ServerType = FbServerType.Default;
+            _fbCon = new FbConnection(fb_cons.ToString());            
+        }
+
+        public object InsertWithReturnId(string request, bool isCommit)
+        {
+            Console.WriteLine(request);
             _fbCon.Open();
+            FbTransaction transaction = _fbCon.BeginTransaction();
+            FbCommand command = new FbCommand(request, _fbCon, transaction);
+            var lastId = command.ExecuteScalar();
+            if (isCommit)
+                transaction.Commit();
+            else
+                transaction.Rollback();
             _fbCon.Close();
+            return lastId;
         }
 
         public void DUIRequest(string request, bool isCommit)
         {
+            Console.WriteLine(request);
             _fbCon.Open();
-            FbTransaction transaction = _fbCon.BeginTransaction();
+            FbTransaction transaction = _fbCon.BeginTransaction();            
             FbCommand command = new FbCommand(request, _fbCon, transaction);
             command.ExecuteNonQuery();
             if (isCommit)
@@ -39,6 +65,7 @@ namespace BD
 
         public List<Dictionary<object, object>> SelectRequest(string request)
         {
+            Console.WriteLine(request);
             _fbCon.Open();
             FbCommand command = new FbCommand(request, _fbCon);
             FbDataReader dataReader = command.ExecuteReader();

@@ -28,24 +28,18 @@ namespace BD
 
         private void LoginButtonClick(object sender, EventArgs e)
         {
-            if (Check())
-            {
+            if(CheckNullField())
                 _loginHandler();
-            }
-            else
-            {
-                WinHelp.ShowMessage("Логин/пароль не распознан");
-            }
         }
 
-        private bool Check()
+        private bool CheckNullField()
         {
-            if (LoginTextBox.Text != "")
+            if (LoginTextBox.Text == "" || PasswordTextBox.Text == "")
             {
-                return true;
-            }
-            //CHECK USER ON BD
-            return false;
+                MessageBox.Show("Неправильно введены поля");
+                return false;
+            }            
+            return true;
         }
 
         public User GetUser()

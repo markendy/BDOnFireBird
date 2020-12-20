@@ -57,7 +57,7 @@
             // 
             // ThingTextBox
             // 
-            this.ThingTextBox.Location = new System.Drawing.Point(218, 45);
+            this.ThingTextBox.Location = new System.Drawing.Point(218, 131);
             this.ThingTextBox.Name = "ThingTextBox";
             this.ThingTextBox.Size = new System.Drawing.Size(132, 20);
             this.ThingTextBox.TabIndex = 2;
@@ -65,7 +65,7 @@
             // ThingLabel
             // 
             this.ThingLabel.AutoSize = true;
-            this.ThingLabel.Location = new System.Drawing.Point(9, 48);
+            this.ThingLabel.Location = new System.Drawing.Point(9, 134);
             this.ThingLabel.Name = "ThingLabel";
             this.ThingLabel.Size = new System.Drawing.Size(52, 13);
             this.ThingLabel.TabIndex = 3;
@@ -73,7 +73,7 @@
             // 
             // CabinetLabelTextBox
             // 
-            this.CabinetLabelTextBox.Location = new System.Drawing.Point(218, 80);
+            this.CabinetLabelTextBox.Location = new System.Drawing.Point(218, 158);
             this.CabinetLabelTextBox.Name = "CabinetLabelTextBox";
             this.CabinetLabelTextBox.Size = new System.Drawing.Size(132, 20);
             this.CabinetLabelTextBox.TabIndex = 4;
@@ -81,7 +81,7 @@
             // CabinetLabel
             // 
             this.CabinetLabel.AutoSize = true;
-            this.CabinetLabel.Location = new System.Drawing.Point(9, 83);
+            this.CabinetLabel.Location = new System.Drawing.Point(9, 161);
             this.CabinetLabel.Name = "CabinetLabel";
             this.CabinetLabel.Size = new System.Drawing.Size(49, 13);
             this.CabinetLabel.TabIndex = 5;
@@ -90,7 +90,7 @@
             // ThingComboBox
             // 
             this.ThingComboBox.FormattingEnabled = true;
-            this.ThingComboBox.Location = new System.Drawing.Point(67, 45);
+            this.ThingComboBox.Location = new System.Drawing.Point(67, 131);
             this.ThingComboBox.Name = "ThingComboBox";
             this.ThingComboBox.Size = new System.Drawing.Size(145, 21);
             this.ThingComboBox.TabIndex = 6;
@@ -98,14 +98,14 @@
             // CabinetLabelComboBox
             // 
             this.CabinetLabelComboBox.FormattingEnabled = true;
-            this.CabinetLabelComboBox.Location = new System.Drawing.Point(67, 80);
+            this.CabinetLabelComboBox.Location = new System.Drawing.Point(67, 158);
             this.CabinetLabelComboBox.Name = "CabinetLabelComboBox";
             this.CabinetLabelComboBox.Size = new System.Drawing.Size(145, 21);
             this.CabinetLabelComboBox.TabIndex = 7;
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(12, 150);
+            this.AddButton.Location = new System.Drawing.Point(15, 205);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(336, 23);
             this.AddButton.TabIndex = 8;
@@ -117,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 185);
+            this.ClientSize = new System.Drawing.Size(360, 240);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.CabinetLabelComboBox);
             this.Controls.Add(this.ThingComboBox);

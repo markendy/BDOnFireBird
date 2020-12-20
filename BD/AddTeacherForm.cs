@@ -15,7 +15,6 @@ namespace BD
     {
         public delegate void TeacherDelegate(Teacher teacher);
         private event TeacherDelegate _addTeacher;
-        private Teacher _teacher;
 
         public AddTeacherForm(TeacherDelegate addTeacher)
         {
@@ -31,8 +30,25 @@ namespace BD
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            //creare teacher
-            _addTeacher(_teacher);
+            if (TeacherFullNameLabelTextBox.Text.Split().Length != 3)
+            {
+                MessageBox.Show("Неккоректно заполнено ФИО");
+            }
+            else if (ThingTextBox.Text == "")
+            {
+                MessageBox.Show("Неккоректно заполнен предмет");
+            }
+            else if (CabinetLabelTextBox.Text == "")
+            {
+                MessageBox.Show("Неккоректно заполнен предмет");
+            }
+            else
+                _addTeacher(new Teacher(
+                    TeacherFullNameLabelTextBox.Text.Split()[0],
+                    TeacherFullNameLabelTextBox.Text.Split()[1],
+                    TeacherFullNameLabelTextBox.Text.Split()[2],                    
+                    CabinetLabelTextBox.Text,
+                    ThingTextBox.Text));
         }
     }
 }
