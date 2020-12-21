@@ -3,25 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BD
 {
     public class Teacher
     {
-        public Teacher(string firstName, string middleName, string lastName, string cabinet, string thing)
+        public Teacher(string firstName, string middleName, string lastName, string cabinet, ListBox thingListBox, string login, string pass)
         {
             FirstName = firstName;
             MiddleName = middleName;
             LastName = lastName;
+            ListThing = thingListBox;
             Cabinet = cabinet;
-            Thing = thing;
+            Login = login;
+            Password = pass;
         }
+
+        public string Login { get; set; }
+        public string Password { get; set; }
 
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
 
-        public string Thing { get; set; }
         public string Cabinet { get; set; }
+
+        public ListBox ListThing{ get; set; }
     }
 }

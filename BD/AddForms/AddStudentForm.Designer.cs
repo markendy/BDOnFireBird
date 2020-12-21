@@ -35,6 +35,10 @@
             this.StudentClassLable = new System.Windows.Forms.Label();
             this.StudentClassComboBox = new System.Windows.Forms.ComboBox();
             this.AddStudentButton = new System.Windows.Forms.Button();
+            this.LoginLabel = new System.Windows.Forms.Label();
+            this.LoginTextBox = new System.Windows.Forms.TextBox();
+            this.PasswordLabel = new System.Windows.Forms.Label();
+            this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // StudentFirstNameTextBox
@@ -88,7 +92,7 @@
             // 
             // AddStudentButton
             // 
-            this.AddStudentButton.Location = new System.Drawing.Point(15, 88);
+            this.AddStudentButton.Location = new System.Drawing.Point(15, 158);
             this.AddStudentButton.Name = "AddStudentButton";
             this.AddStudentButton.Size = new System.Drawing.Size(159, 23);
             this.AddStudentButton.TabIndex = 7;
@@ -96,11 +100,47 @@
             this.AddStudentButton.UseVisualStyleBackColor = true;
             this.AddStudentButton.Click += new System.EventHandler(this.AddStudentButton_Click);
             // 
+            // LoginLabel
+            // 
+            this.LoginLabel.AutoSize = true;
+            this.LoginLabel.Location = new System.Drawing.Point(12, 91);
+            this.LoginLabel.Name = "LoginLabel";
+            this.LoginLabel.Size = new System.Drawing.Size(38, 13);
+            this.LoginLabel.TabIndex = 9;
+            this.LoginLabel.Text = "Логин";
+            // 
+            // LoginTextBox
+            // 
+            this.LoginTextBox.Location = new System.Drawing.Point(74, 88);
+            this.LoginTextBox.Name = "LoginTextBox";
+            this.LoginTextBox.Size = new System.Drawing.Size(100, 20);
+            this.LoginTextBox.TabIndex = 8;
+            // 
+            // PasswordLabel
+            // 
+            this.PasswordLabel.AutoSize = true;
+            this.PasswordLabel.Location = new System.Drawing.Point(12, 117);
+            this.PasswordLabel.Name = "PasswordLabel";
+            this.PasswordLabel.Size = new System.Drawing.Size(45, 13);
+            this.PasswordLabel.TabIndex = 11;
+            this.PasswordLabel.Text = "Пароль";
+            // 
+            // PasswordTextBox
+            // 
+            this.PasswordTextBox.Location = new System.Drawing.Point(74, 114);
+            this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.Size = new System.Drawing.Size(100, 20);
+            this.PasswordTextBox.TabIndex = 10;
+            // 
             // AddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(190, 116);
+            this.ClientSize = new System.Drawing.Size(190, 193);
+            this.Controls.Add(this.PasswordLabel);
+            this.Controls.Add(this.PasswordTextBox);
+            this.Controls.Add(this.LoginLabel);
+            this.Controls.Add(this.LoginTextBox);
             this.Controls.Add(this.AddStudentButton);
             this.Controls.Add(this.StudentClassComboBox);
             this.Controls.Add(this.StudentClassLable);
@@ -126,5 +166,9 @@
         private System.Windows.Forms.Label StudentClassLable;
         private System.Windows.Forms.ComboBox StudentClassComboBox;
         private System.Windows.Forms.Button AddStudentButton;
+        private System.Windows.Forms.Label LoginLabel;
+        private System.Windows.Forms.TextBox LoginTextBox;
+        private System.Windows.Forms.Label PasswordLabel;
+        private System.Windows.Forms.TextBox PasswordTextBox;
     }
 }

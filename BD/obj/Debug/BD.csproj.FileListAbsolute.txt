@@ -28,3 +28,4 @@ E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.csprojAssemblyRefere
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.Quest1Form.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddClassForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddStudentForm.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddLessonForm.resources

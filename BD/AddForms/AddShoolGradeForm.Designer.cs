@@ -159,7 +159,6 @@
             this.DataTextBox.Size = new System.Drawing.Size(185, 20);
             this.DataTextBox.TabIndex = 19;
             this.DataTextBox.Click += new System.EventHandler(this.DataTextBoxClick);
-            this.DataTextBox.TextChanged += new System.EventHandler(this.DataTextBoxTextChanged);
             // 
             // StudentComboBox
             // 

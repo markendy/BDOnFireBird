@@ -34,6 +34,7 @@
             this.Quest1Button = new System.Windows.Forms.Button();
             this.ClassAddButton = new System.Windows.Forms.Button();
             this.ClassStudentButton = new System.Windows.Forms.Button();
+            this.AddLessonButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,12 +48,12 @@
             this.DataGridView.Name = "DataGridView";
             this.DataGridView.ReadOnly = true;
             this.DataGridView.RowTemplate.Height = 28;
-            this.DataGridView.Size = new System.Drawing.Size(1137, 369);
+            this.DataGridView.Size = new System.Drawing.Size(596, 369);
             this.DataGridView.TabIndex = 0;
             // 
             // AddShoolGradeButton
             // 
-            this.AddShoolGradeButton.Location = new System.Drawing.Point(467, 58);
+            this.AddShoolGradeButton.Location = new System.Drawing.Point(8, 127);
             this.AddShoolGradeButton.Name = "AddShoolGradeButton";
             this.AddShoolGradeButton.Size = new System.Drawing.Size(151, 23);
             this.AddShoolGradeButton.TabIndex = 1;
@@ -100,11 +101,22 @@
             this.ClassStudentButton.UseVisualStyleBackColor = true;
             this.ClassStudentButton.Click += new System.EventHandler(this.StudentAddButton_Click);
             // 
+            // AddLessonButton
+            // 
+            this.AddLessonButton.Location = new System.Drawing.Point(8, 98);
+            this.AddLessonButton.Name = "AddLessonButton";
+            this.AddLessonButton.Size = new System.Drawing.Size(151, 23);
+            this.AddLessonButton.TabIndex = 7;
+            this.AddLessonButton.Text = "Добавить урок";
+            this.AddLessonButton.UseVisualStyleBackColor = true;
+            this.AddLessonButton.Click += new System.EventHandler(this.AddLessonButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 551);
+            this.ClientSize = new System.Drawing.Size(615, 551);
+            this.Controls.Add(this.AddLessonButton);
             this.Controls.Add(this.ClassStudentButton);
             this.Controls.Add(this.ClassAddButton);
             this.Controls.Add(this.Quest1Button);
@@ -113,6 +125,7 @@
             this.Controls.Add(this.DataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -130,5 +143,6 @@
         private System.Windows.Forms.Button Quest1Button;
         private System.Windows.Forms.Button ClassAddButton;
         private System.Windows.Forms.Button ClassStudentButton;
+        private System.Windows.Forms.Button AddLessonButton;
     }
 }

@@ -12,9 +12,10 @@ namespace BD
 {
     public partial class AddStudentForm : Form
     {
-        private event MainForm.RequestrDelegate _addStudentHandler;
+        public delegate void StudentDelegate(Student student);
+        private event StudentDelegate _addStudentHandler;
 
-        public AddStudentForm(MainForm.RequestrDelegate requestrDelegate)
+        public AddStudentForm(StudentDelegate requestrDelegate)
         {
             InitializeComponent();
             MainForm.DataBase.SetComboBox(StudentClassComboBox, "CLASS", "NAME");
@@ -24,7 +25,9 @@ namespace BD
         private void AddStudentButton_Click(object sender, EventArgs e)
         {
             if (StudentFirstNameTextBox.Text != "" || StudentLastNameTextBox.Text != "" || StudentClassComboBox.Text != "")
-                _addStudentHandler($"INSERT INTO STUDENT VALUES(null, '{StudentFirstNameTextBox.Text}', '{StudentLastNameTextBox.Text}', {((KeyValuePair<object, object>)StudentClassComboBox.SelectedItem).Key});");
+            {
+                _addStudentHandler(new Student(StudentFirstNameTextBox.Text, StudentLastNameTextBox.Text, ((KeyValuePair<object, object>)StudentClassComboBox.SelectedItem).Key, LoginTextBox.Text, PasswordTextBox.Text));
+            }
             else
                 MessageBox.Show("Некоторые поля пусты");
         }

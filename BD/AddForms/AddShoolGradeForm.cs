@@ -20,15 +20,14 @@ namespace BD
 
             MainForm.DataBase.SetComboBox(ThingComboBox, "THING", "NAME");
             MainForm.DataBase.SetComboBox(ClassComboBox, "CLASS", "NAME");
-            MainForm.DataBase.SetComboBox(StudentComboBox, "STUDENT", "LAST_NAME");
+            DataTextBox.Text = Calendar.SelectionRange.Start.ToString("dd.MM.yyyy");
 
             _addSchoolGradeHandler += _addSchoolGradeDelegate;
         }      
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            //INSERT VALUE
-            _addSchoolGradeHandler("REQUEST");
+            _addSchoolGradeHandler($"INSERT INTO PERFORMANCE VALUES(null, {((KeyValuePair<object, object>)StudentComboBox.SelectedItem).Key}, {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key}, {ShoolGradeLabelComboBox.Text}, '{Calendar.SelectionRange.Start.ToString("yyyy-MM-dd")}');");
         }
 
         private void CalendarDateSelected(object sender, DateRangeEventArgs e)
@@ -43,14 +42,8 @@ namespace BD
             Calendar.Visible = true;
         }
 
-        private void NumberOfLessonTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void ThingComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            // do something
             //ClassComboBox.Visible = true;
         }
 
@@ -61,17 +54,12 @@ namespace BD
 
         private void ClassComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            //StudentComboBox.Visible = true;
+            MainForm.DataBase.SetComboBox(StudentComboBox, "STUDENT", "LAST_NAME", null, $"CLASS_ID = {((KeyValuePair<object, object>)ClassComboBox.SelectedItem).Key}");
         }
 
         private void StudentComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             //ShoolGradeLabelComboBox.Visible = true;
-        }
-
-        private void DataTextBoxTextChanged(object sender, EventArgs e)
-        {
-
-        }
+        } 
     }
 }

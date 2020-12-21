@@ -50,32 +50,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddShoolGradeForm.cs">
+    <Compile Include="AddForms\AddShoolGradeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddShoolGradeForm.Designer.cs">
+    <Compile Include="AddForms\AddShoolGradeForm.Designer.cs">
       <DependentUpon>AddShoolGradeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddClassForm.cs">
+    <Compile Include="AddForms\AddClassForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddClassForm.Designer.cs">
+    <Compile Include="AddForms\AddClassForm.Designer.cs">
       <DependentUpon>AddClassForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddStudentForm.cs">
+    <Compile Include="AddForms\AddStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddStudentForm.Designer.cs">
+    <Compile Include="AddForms\AddStudentForm.Designer.cs">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddTeacherForm.cs">
+    <Compile Include="AddForms\AddTeacherForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddTeacherForm.Designer.cs">
+    <Compile Include="AddForms\AddTeacherForm.Designer.cs">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataBaseAdapter.cs" />
-    <Compile Include="IForm.cs" />
+    <Compile Include="Services\DataBaseAdapter.cs" />
+    <Compile Include="AddForms\AddLessonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddForms\AddLessonForm.Designer.cs">
+      <DependentUpon>AddLessonForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,26 +95,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quest1Form.cs">
+    <Compile Include="Quests\Quest1Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Quest1Form.Designer.cs">
+    <Compile Include="Quests\Quest1Form.Designer.cs">
       <DependentUpon>Quest1Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableView.cs" />
-    <Compile Include="Teacher.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="WinHelp.cs" />
-    <EmbeddedResource Include="AddShoolGradeForm.resx">
+    <Compile Include="Users\Student.cs" />
+    <Compile Include="Services\TableView.cs" />
+    <Compile Include="Users\Teacher.cs" />
+    <Compile Include="Users\User.cs" />
+    <EmbeddedResource Include="AddForms\AddLessonForm.resx">
+      <DependentUpon>AddLessonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddForms\AddShoolGradeForm.resx">
       <DependentUpon>AddShoolGradeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddClassForm.resx">
+    <EmbeddedResource Include="AddForms\AddClassForm.resx">
       <DependentUpon>AddClassForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddStudentForm.resx">
+    <EmbeddedResource Include="AddForms\AddStudentForm.resx">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddTeacherForm.resx">
+    <EmbeddedResource Include="AddForms\AddTeacherForm.resx">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
@@ -127,7 +135,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Quest1Form.resx">
+    <EmbeddedResource Include="Quests\Quest1Form.resx">
       <DependentUpon>Quest1Form.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

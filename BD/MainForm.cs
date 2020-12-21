@@ -19,6 +19,7 @@ namespace BD
         private Quest1Form _quest1Form;
         private AddClassForm _addClassForm;
         private AddStudentForm _addStudentForm;
+        private AddLessonForm _addLessonForm;
 
         public static DataBaseAdapter DataBase;
         private TableView _tableView;
@@ -32,10 +33,8 @@ namespace BD
             DataBase = new DataBaseAdapter();
             _tableView = new TableView(DataGridView);
 
-            //_tableView.CreateMainTableView(_dataBase.SelectRequest("SELECT * FROM TEACHER;"));
-
             // SYSTEM :: _tableView.CreateMainTableView(_dataBase.SelectRequest("select * from sec$users;"));
-            
+
             _loginForm = new LoginForm(Logined);
             _loginForm.Show();
         }
@@ -81,6 +80,12 @@ namespace BD
             _addStudentForm.Show();
         }
 
+        private void AddLessonButton_Click(object sender, EventArgs e)
+        {
+            _addLessonForm = new AddLessonForm(AddLesson);
+            _addLessonForm.Show();
+        }
+
         //========================================================
         // Outside method
         //========================================================
@@ -100,6 +105,7 @@ namespace BD
             {
                 DataBase.Connect(login);
                 Show();
+
                 CloseWindow(_loginForm);
             }
             else
@@ -110,21 +116,23 @@ namespace BD
 
         private void AddShoolGrade(string request)
         {
-            //INSERTN VALUE IN DB
+            DataBase.DUIRequest(request, true);
+
             CloseWindow(_addShoolGradeForm);
         }
 
         private void AddTeacher(Teacher teacher)
         {
             var lastId = DataBase.InsertWithReturnId(
-                $"INSERT INTO TEACHER VALUES(null, '{teacher.FirstName}', '{teacher.MiddleName}', '{teacher.LastName}') RETURNING ID;"
+                $"INSERT INTO TEACHER VALUES(null, '{teacher.FirstName}', '{teacher.MiddleName}', '{teacher.LastName}', '{teacher.Cabinet}') RETURNING ID;"
                 , true);
-            DataBase.DUIRequest(
-                $"INSERT INTO THING VALUES(null, '{teacher.Thing}', {lastId});", 
+            foreach (var t in teacher.ListThing.SelectedItems)
+            {               
+                DataBase.DUIRequest(
+                $"INSERT INTO BIND_TEACHER_THING VALUES(null, {lastId}, {((KeyValuePair<object, object>)t).Key.ToString()});",
                 true);
-            DataBase.DUIRequest(
-                $"INSERT INTO CABINET VALUES(null, {teacher.Cabinet}, {lastId});",
-                true);
+            }
+            DataBase.DUIRequest($"INSERT INTO PERSONAL VALUES(null, '{teacher.Login}','{teacher.Password}', 'TEACHER');", true);
             CloseWindow(_addTeacherForm);
         }
 
@@ -135,11 +143,19 @@ namespace BD
             CloseWindow(_addClassForm);
         }
 
-        private void AddStudent(string request)
+        private void AddStudent(Student student)
+        {
+            DataBase.DUIRequest($"INSERT INTO STUDENT VALUES(null, '{student.FirstName}', '{student.LastName}', {student.Class});", true);
+            DataBase.DUIRequest($"INSERT INTO PERSONAL VALUES(null, '{student.Login}','{student.Password}','STUDENT');", true);
+
+            CloseWindow(_addStudentForm);
+        }
+
+        private void AddLesson(string request)
         {
             DataBase.DUIRequest(request, true);
 
-            CloseWindow(_addStudentForm);
+            CloseWindow(_addLessonForm);
         }
 
         private void CloseWindow(Form form)
