@@ -31,7 +31,7 @@
             this.TeacherFullNameLabelTextBox = new System.Windows.Forms.TextBox();
             this.TeacherFullNameLabel = new System.Windows.Forms.Label();
             this.ThingLabel = new System.Windows.Forms.Label();
-            this.CabinetLabelTextBox = new System.Windows.Forms.TextBox();
+            this.CabinetTextBox = new System.Windows.Forms.TextBox();
             this.CabinetLabel = new System.Windows.Forms.Label();
             this.CabinetComboBox = new System.Windows.Forms.ComboBox();
             this.AddButton = new System.Windows.Forms.Button();
@@ -41,8 +41,13 @@
             this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.ThingListBox = new System.Windows.Forms.ListBox();
             this.ThingTextBox = new System.Windows.Forms.TextBox();
-            this.AddNewButton = new System.Windows.Forms.Button();
+            this.AddThingButton = new System.Windows.Forms.Button();
             this.AddCabinetButton = new System.Windows.Forms.Button();
+            this.LastNameСomboBox = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.DelTeacherLabel = new System.Windows.Forms.Label();
+            this.MiddleNameСomboBox = new System.Windows.Forms.ComboBox();
+            this.FirstNameСomboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // TeacherFullNameLabelTextBox
@@ -70,12 +75,12 @@
             this.ThingLabel.TabIndex = 3;
             this.ThingLabel.Text = "Предмет";
             // 
-            // CabinetLabelTextBox
+            // CabinetTextBox
             // 
-            this.CabinetLabelTextBox.Location = new System.Drawing.Point(218, 167);
-            this.CabinetLabelTextBox.Name = "CabinetLabelTextBox";
-            this.CabinetLabelTextBox.Size = new System.Drawing.Size(132, 20);
-            this.CabinetLabelTextBox.TabIndex = 4;
+            this.CabinetTextBox.Location = new System.Drawing.Point(218, 167);
+            this.CabinetTextBox.Name = "CabinetTextBox";
+            this.CabinetTextBox.Size = new System.Drawing.Size(132, 20);
+            this.CabinetTextBox.TabIndex = 4;
             // 
             // CabinetLabel
             // 
@@ -93,7 +98,7 @@
             this.CabinetComboBox.Name = "CabinetComboBox";
             this.CabinetComboBox.Size = new System.Drawing.Size(142, 21);
             this.CabinetComboBox.TabIndex = 7;
-            this.CabinetComboBox.SelectedIndexChanged += new System.EventHandler(this.CabinetLabelComboBox_SelectedIndexChanged);
+            this.CabinetComboBox.SelectedIndexChanged += new System.EventHandler(this.CabinetComboBox_SelectedIndexChanged);
             // 
             // AddButton
             // 
@@ -134,6 +139,7 @@
             // 
             this.PasswordTextBox.Location = new System.Drawing.Point(216, 61);
             this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.PasswordChar = '&';
             this.PasswordTextBox.Size = new System.Drawing.Size(132, 20);
             this.PasswordTextBox.TabIndex = 11;
             // 
@@ -153,15 +159,15 @@
             this.ThingTextBox.Size = new System.Drawing.Size(132, 20);
             this.ThingTextBox.TabIndex = 2;
             // 
-            // AddNewButton
+            // AddThingButton
             // 
-            this.AddNewButton.Location = new System.Drawing.Point(216, 129);
-            this.AddNewButton.Name = "AddNewButton";
-            this.AddNewButton.Size = new System.Drawing.Size(132, 23);
-            this.AddNewButton.TabIndex = 14;
-            this.AddNewButton.Text = "Новый предмет";
-            this.AddNewButton.UseVisualStyleBackColor = true;
-            this.AddNewButton.Click += new System.EventHandler(this.AddNewButton_Click);
+            this.AddThingButton.Location = new System.Drawing.Point(216, 129);
+            this.AddThingButton.Name = "AddThingButton";
+            this.AddThingButton.Size = new System.Drawing.Size(132, 23);
+            this.AddThingButton.TabIndex = 14;
+            this.AddThingButton.Text = "Новый предмет";
+            this.AddThingButton.UseVisualStyleBackColor = true;
+            this.AddThingButton.Click += new System.EventHandler(this.AddNewButton_Click);
             // 
             // AddCabinetButton
             // 
@@ -171,15 +177,63 @@
             this.AddCabinetButton.TabIndex = 15;
             this.AddCabinetButton.Text = "Новый кабинет";
             this.AddCabinetButton.UseVisualStyleBackColor = true;
-            this.AddCabinetButton.Click += new System.EventHandler(this.button1_Click);
+            this.AddCabinetButton.Click += new System.EventHandler(this.AddCabinetButton_Click);
+            // 
+            // LastNameСomboBox
+            // 
+            this.LastNameСomboBox.FormattingEnabled = true;
+            this.LastNameСomboBox.Location = new System.Drawing.Point(395, 226);
+            this.LastNameСomboBox.Name = "LastNameСomboBox";
+            this.LastNameСomboBox.Size = new System.Drawing.Size(110, 21);
+            this.LastNameСomboBox.TabIndex = 16;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(393, 265);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(344, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Удалить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // DelTeacherLabel
+            // 
+            this.DelTeacherLabel.AutoSize = true;
+            this.DelTeacherLabel.Location = new System.Drawing.Point(548, 199);
+            this.DelTeacherLabel.Name = "DelTeacherLabel";
+            this.DelTeacherLabel.Size = new System.Drawing.Size(49, 13);
+            this.DelTeacherLabel.TabIndex = 20;
+            this.DelTeacherLabel.Text = "Учитель";
+            // 
+            // MiddleNameСomboBox
+            // 
+            this.MiddleNameСomboBox.FormattingEnabled = true;
+            this.MiddleNameСomboBox.Location = new System.Drawing.Point(511, 226);
+            this.MiddleNameСomboBox.Name = "MiddleNameСomboBox";
+            this.MiddleNameСomboBox.Size = new System.Drawing.Size(110, 21);
+            this.MiddleNameСomboBox.TabIndex = 21;
+            // 
+            // FirstNameСomboBox
+            // 
+            this.FirstNameСomboBox.FormattingEnabled = true;
+            this.FirstNameСomboBox.Location = new System.Drawing.Point(627, 226);
+            this.FirstNameСomboBox.Name = "FirstNameСomboBox";
+            this.FirstNameСomboBox.Size = new System.Drawing.Size(110, 21);
+            this.FirstNameСomboBox.TabIndex = 22;
             // 
             // AddTeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 300);
+            this.ClientSize = new System.Drawing.Size(1008, 300);
+            this.Controls.Add(this.FirstNameСomboBox);
+            this.Controls.Add(this.MiddleNameСomboBox);
+            this.Controls.Add(this.DelTeacherLabel);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LastNameСomboBox);
             this.Controls.Add(this.AddCabinetButton);
-            this.Controls.Add(this.AddNewButton);
+            this.Controls.Add(this.AddThingButton);
             this.Controls.Add(this.ThingListBox);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.PasswordTextBox);
@@ -188,7 +242,7 @@
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.CabinetComboBox);
             this.Controls.Add(this.CabinetLabel);
-            this.Controls.Add(this.CabinetLabelTextBox);
+            this.Controls.Add(this.CabinetTextBox);
             this.Controls.Add(this.ThingLabel);
             this.Controls.Add(this.ThingTextBox);
             this.Controls.Add(this.TeacherFullNameLabel);
@@ -207,7 +261,7 @@
         private System.Windows.Forms.TextBox TeacherFullNameLabelTextBox;
         private System.Windows.Forms.Label TeacherFullNameLabel;
         private System.Windows.Forms.Label ThingLabel;
-        private System.Windows.Forms.TextBox CabinetLabelTextBox;
+        private System.Windows.Forms.TextBox CabinetTextBox;
         private System.Windows.Forms.Label CabinetLabel;
         private System.Windows.Forms.ComboBox CabinetComboBox;
         private System.Windows.Forms.Button AddButton;
@@ -217,7 +271,12 @@
         private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.ListBox ThingListBox;
         private System.Windows.Forms.TextBox ThingTextBox;
-        private System.Windows.Forms.Button AddNewButton;
+        private System.Windows.Forms.Button AddThingButton;
         private System.Windows.Forms.Button AddCabinetButton;
+        private System.Windows.Forms.ComboBox LastNameСomboBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label DelTeacherLabel;
+        private System.Windows.Forms.ComboBox MiddleNameСomboBox;
+        private System.Windows.Forms.ComboBox FirstNameСomboBox;
     }
 }

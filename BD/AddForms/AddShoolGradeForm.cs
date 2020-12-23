@@ -17,7 +17,6 @@ namespace BD
         public AddShoolGradeForm(MainForm.RequestrDelegate _addSchoolGradeDelegate)
         {
             InitializeComponent();
-
             MainForm.DataBase.SetComboBox(ThingComboBox, "THING", "NAME");
             MainForm.DataBase.SetComboBox(ClassComboBox, "CLASS", "NAME");
             DataTextBox.Text = Calendar.SelectionRange.Start.ToString("dd.MM.yyyy");
@@ -27,7 +26,10 @@ namespace BD
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            _addSchoolGradeHandler($"INSERT INTO PERFORMANCE VALUES(null, {((KeyValuePair<object, object>)StudentComboBox.SelectedItem).Key}, {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key}, {ShoolGradeLabelComboBox.Text}, '{Calendar.SelectionRange.Start.ToString("yyyy-MM-dd")}');");
+            if (ThingComboBox.Text != "" && ClassComboBox.Text != "" && StudentComboBox.Text != "" && ShoolGradeLabelComboBox.SelectedItem != null && DataTextBox.Text != "")
+                _addSchoolGradeHandler($"INSERT INTO PERFORMANCE VALUES(null, {((KeyValuePair<object, object>)StudentComboBox.SelectedItem).Key}, {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key}, {ShoolGradeLabelComboBox.Text}, '{Calendar.SelectionRange.Start.ToString("yyyy-MM-dd")}');");
+            else
+                MessageBox.Show("Неправильно заполнены поля");
         }
 
         private void CalendarDateSelected(object sender, DateRangeEventArgs e)

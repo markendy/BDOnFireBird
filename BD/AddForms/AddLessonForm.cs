@@ -54,28 +54,41 @@ namespace BD
 
         private void AddLessonButton_Click(object sender, EventArgs e)
         {
-            _addLessonHandler($"INSERT INTO LESSON VALUES(null, " +
-                $"{NumberComboBox.SelectedItem}, " +
-                $"{((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Key}, " +
-                $"{((KeyValuePair<object, object>)TeacherComboBox.SelectedItem).Key}, " +
-                $"{((KeyValuePair<object, object>)ClassComboBox.SelectedItem).Key}, " +
-                $"{((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key}, " +
-                $"'{Calendar.SelectionRange.Start:yyyy-MM-dd}');");
+            if (NumberComboBox.SelectedItem == null ||
+                ThingComboBox.Text == "" ||
+                TeacherComboBox.Text == "" ||
+                CabinetComboBox.Text == "" ||
+                ClassComboBox.Text == "" ||
+                DataTextBox.Text == "")
+                    MessageBox.Show("Некорректно введенные поля");
+            else
+            {
+                _addLessonHandler($"INSERT INTO LESSON VALUES(null, " +
+               $"{NumberComboBox.SelectedItem}, " +
+               $"{((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Key}, " +
+               $"{((KeyValuePair<object, object>)TeacherComboBox.SelectedItem).Key}, " +
+               $"{((KeyValuePair<object, object>)ClassComboBox.SelectedItem).Key}, " +
+               $"{((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key}, " +
+               $"'{Calendar.SelectionRange.Start:yyyy-MM-dd}');");
+            }
         }
 
         private void ThingComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var items = MainForm.DataBase.SelectRequest($"SELECT TEACHER.ID, TEACHER.LAST_NAME FROM TEACHER " +
                 $"JOIN BIND_TEACHER_THING ON (BIND_TEACHER_THING.TEACHER_ID = TEACHER.ID) " +
-                $"WHERE BIND_TEACHER_THING.THING_ID = {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key};");
+                $"WHERE BIND_TEACHER_THING.THING_ID = {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key};");  
             MainForm.DataBase.SetComboBox(items, TeacherComboBox);
+            if (items.Count == 0)
+                MainForm.DataBase.SetComboBox(items, CabinetComboBox);
         }
 
         private void TeacherComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var items = MainForm.DataBase.SelectRequest($"SELECT CABINET.ID, CABINET.NUMBER FROM CABINET JOIN TEACHER " +
-                $"ON (TEACHER.CABINET_ID = CABINET.ID) " +
-                $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)TeacherComboBox.SelectedItem).Key};");
+            var items = new List<Dictionary<object, object>>();
+            items = MainForm.DataBase.SelectRequest($"SELECT CABINET.ID, CABINET.NUMBER FROM CABINET JOIN TEACHER " +
+            $"ON (TEACHER.CABINET_ID = CABINET.ID) " +
+            $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)TeacherComboBox.SelectedItem).Key};");
             MainForm.DataBase.SetComboBox(items, CabinetComboBox);
         }
     }

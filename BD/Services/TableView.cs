@@ -33,7 +33,7 @@ namespace BD
         public void CreateMainTableView(List<Dictionary<object, object>> list)
         {
             _answer = list;
-            if (_answer.Count != 0)
+            if (_answer != null && _answer.Count != 0)
             {
                 _dataGridView.Columns.Clear();
                 var str = _answer[0];

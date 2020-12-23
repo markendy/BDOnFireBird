@@ -13,7 +13,7 @@ namespace BD
 {
     public partial class AddTeacherForm : Form, IDisposable
     {
-        public delegate void TeacherDelegate(Teacher teacher);
+        public delegate void TeacherDelegate(Teacher teacher = null, string req = null);
         private event TeacherDelegate _addTeacherHandler;
 
         public AddTeacherForm(TeacherDelegate addTeacher)
@@ -22,6 +22,8 @@ namespace BD
 
             MainForm.DataBase.SetComboBox(ThingListBox, "THING", "NAME");
             MainForm.DataBase.SetComboBox(CabinetComboBox, "CABINET", "NUMBER");
+
+            ReloadDelField();
 
             _addTeacherHandler += addTeacher;
         }
@@ -37,9 +39,9 @@ namespace BD
             {
                 MessageBox.Show("Неккоректно заполнено ФИО");
             }
-            else if (CabinetLabelTextBox.Text == "")
+            else if (CabinetTextBox.Text == "")
             {
-                MessageBox.Show("Неккоректно заполнен предмет");
+                MessageBox.Show("Неккоректно заполнен кабинет");
             }
             else
                 _addTeacherHandler(new Teacher(
@@ -58,21 +60,17 @@ namespace BD
                 ThingTextBox.Text = ((KeyValuePair<object, object>)ThingListBox.SelectedItem).Value.ToString();
         }
 
-        private void CabinetLabelComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (CabinetComboBox.Items.Count != 0)
-                CabinetLabelTextBox.Text = ((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Value.ToString();
-        }
-
         private void AddNewButton_Click(object sender, EventArgs e)
         {
+            ThingTextBox.Text = ThingTextBox.Text.ToUpper();
             object r = 1;
             if (ThingTextBox.Text != "")
-                r = MainForm.DataBase.InsertWithReturnId($"SELECT COUNT(ID) FROM THING WHERE NAME = '{ThingTextBox.Text}';", true);
+                r = MainForm.DataBase.RequestWithReturnId($"SELECT COUNT(ID) FROM THING WHERE NAME = '{ThingTextBox.Text}';", true);
             if (Convert.ToInt32(r) == 0)
             {
-                MainForm.DataBase.DUIRequest($"INSERT INTO THING VALUES(null, '{ThingTextBox.Text.ToUpper()}');", true);
+                MainForm.DataBase.DUIRequest($"INSERT INTO THING VALUES(null, '{ThingTextBox.Text}');", true);
                 MainForm.DataBase.SetComboBox(ThingListBox, "THING", "NAME");
+                ThingListBox.Text = ThingTextBox.Text;
             }
             else
             {
@@ -80,19 +78,64 @@ namespace BD
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AddCabinetButton_Click(object sender, EventArgs e)
         {
             object r = 1;
-            if (CabinetLabelTextBox.Text != "")
-                r = MainForm.DataBase.InsertWithReturnId($"SELECT COUNT(ID) FROM CABINET WHERE NUMBER = {CabinetLabelTextBox.Text};", true);
+            if (CabinetTextBox.Text != "")
+                r = MainForm.DataBase.RequestWithReturnId($"SELECT COUNT(ID) FROM CABINET WHERE NUMBER = {CabinetTextBox.Text};", true);
             if (Convert.ToInt32(r) == 0)
             {
-                MainForm.DataBase.DUIRequest($"INSERT INTO CABINET VALUES(null, {CabinetLabelTextBox.Text});", true);
-                MainForm.DataBase.SetComboBox(CabinetComboBox, "CABINET", "NUMBER");
+                MainForm.DataBase.DUIRequest($"INSERT INTO CABINET VALUES(null, {CabinetTextBox.Text}) RETURNING ID;", true); 
+                MainForm.DataBase.SetComboBox(CabinetComboBox, "CABINET", "NUMBER");                
+                CabinetComboBox.Text = CabinetTextBox.Text;    
             }
             else
             {
                 MessageBox.Show("Кабинет уже есть или строка пуста");
+            }
+        }
+
+        private void CabinetComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CabinetTextBox.Text = ((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Value.ToString();
+        }
+
+        private void ReloadDelField()
+        {
+            MainForm.DataBase.SetComboBox(LastNameСomboBox, "TEACHER", "LAST_NAME");
+            MainForm.DataBase.SetComboBox(MiddleNameСomboBox, "TEACHER", "MIDDLE_NAME");
+            MainForm.DataBase.SetComboBox(FirstNameСomboBox, "TEACHER", "FIRST_NAME");
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM TEACHER " +
+                $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
+                $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                $";");
+
+            if (count.Count == 0)
+            {
+                MessageBox.Show("Преподавателя нет");
+            }
+            else
+            {
+                string request = ($"DELETE FROM PERSONAL WHERE ID = (" +
+                    $"SELECT USER_ID FROM TEACHER " +
+                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $";");
+
+                MainForm.DataBase.DUIRequest(request, true);
+                request = ($"DELETE FROM TEACHER " +
+                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $";");
+                _addTeacherHandler(null, request);
+                ReloadDelField();
             }
         }
     }

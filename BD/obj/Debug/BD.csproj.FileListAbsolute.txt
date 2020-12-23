@@ -25,7 +25,7 @@ E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddTeacherForm.resou
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.csproj.CopyComplete
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.csprojAssemblyReference.cache
-E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.Quest1Form.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddClassForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddStudentForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddLessonForm.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.QuestForm.resources
