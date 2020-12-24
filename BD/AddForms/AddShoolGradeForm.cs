@@ -26,8 +26,6 @@ namespace BD
             MainForm.DataBase.SetComboBox(ClassComboBox, "CLASS", "NAME");
             DataTextBox.Text = Calendar.SelectionRange.Start.ToString("dd.MM.yyyy");
 
-            CreateScoreTable();
-
             _addSchoolGradeHandler += _addSchoolGradeDelegate;
         }
 
@@ -36,19 +34,19 @@ namespace BD
             if (StudentComboBox != null && StudentComboBox.SelectedItem != null && StudentComboBox.Items.Count != 0)
             {
                 var res = MainForm.DataBase.SelectRequest($"SELECT " +
-                $"PERFORMANCE.ID, PERFORMANCE.\"DATA\", PERFORMANCE.SCORE, STUDENT.LAST_NAME, THING.NAME FROM PERFORMANCE " +
+                $"PERFORMANCE.ID, PERFORMANCE.\"DATA\" as \"Дата\", PERFORMANCE.SCORE as \"Оценка\", (STUDENT.LAST_NAME || ' '|| STUDENT.FIRST_NAME) as \"Ученик\", THING.NAME as \"Предмет\" FROM PERFORMANCE " +
                 $"JOIN STUDENT ON (PERFORMANCE.STUDENT_ID = STUDENT.ID) " +
-                $"JOIN THING ON (PERFORMANCE.THING_ID = THING.ID)" +
-                $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)StudentComboBox.SelectedItem).Key};");
+                $"JOIN THING ON (PERFORMANCE.THING_ID = THING.ID) " +
+                $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)StudentComboBox.SelectedItem).Key}" +
+                $"ORDER BY \"Дата\";");
                 if (res.Count != 0)
                 {
-                    _table.CreateMainTableView(res);
+                    _table.CreateMainTableView(res, true);
                 }
                 else
                 {
-                    _table.CreateMainTableView(res);
-                }
-               
+                    _table.CreateMainTableView(res, true);
+                }               
             }
         }
 
@@ -87,7 +85,7 @@ namespace BD
 
         private void ClassComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            MainForm.DataBase.SetComboBox(StudentComboBox, "STUDENT", "LAST_NAME", null, $"CLASS_ID = {((KeyValuePair<object, object>)ClassComboBox.SelectedItem).Key}");
+            MainForm.DataBase.SetComboBox(StudentComboBox, "STUDENT", "(STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME)", null, $"CLASS_ID = {((KeyValuePair<object, object>)ClassComboBox.SelectedItem).Key}");
         }
 
         private void StudentComboBoxSelectedIndexChanged(object sender, EventArgs e)

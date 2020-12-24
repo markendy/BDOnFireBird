@@ -32,8 +32,7 @@ namespace BD
 
         private void ReloadDelField()
         {
-            MainForm.DataBase.SetComboBox(DelFirstNameComboBox, "STUDENT", "LAST_NAME");
-            MainForm.DataBase.SetComboBox(DelLastNameComboBox, "STUDENT", "FIRST_NAME");
+            MainForm.DataBase.SetComboBox(DelFirstNameComboBox, "STUDENT", "(STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME)");
         }
 
         private void AddStudentButton_Click(object sender, EventArgs e)
@@ -49,8 +48,8 @@ namespace BD
         private void DelStud(object sender, EventArgs e)
         {
             var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM STUDENT " +
-                $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Value.ToString()}'" +
-                $"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
+                $"WHERE STUDENT.ID = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}'" +
+                //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                 $";");
 
             if (count.Count == 0)
@@ -61,14 +60,14 @@ namespace BD
             {
                 string request = ($"DELETE FROM PERSONAL WHERE ID in (" +
                     $"SELECT USER_ID FROM STUDENT " +
-                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
+                    $"WHERE STUDENT.ID = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}'" +
+                    //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                     $");");
 
                 MainForm.DataBase.DUIRequest(request, true);
                 request = ($"DELETE FROM STUDENT " +
-                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
+                    $"WHERE STUDENT.ID = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}'" +
+                    //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                     $";");
                 _addStudentHandler(null, request);
                 ReloadDelField();

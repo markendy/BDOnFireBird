@@ -39,19 +39,25 @@ namespace BD
             {
                 MessageBox.Show("Неккоректно заполнено ФИО");
             }
-            else if (CabinetTextBox.Text == "")
+            else if(CabinetComboBox.SelectedItem == null)
             {
-                MessageBox.Show("Неккоректно заполнен кабинет");
+                _addTeacherHandler(new Teacher(
+                    TeacherFullNameLabelTextBox.Text.Split()[0],
+                    TeacherFullNameLabelTextBox.Text.Split()[1],
+                    TeacherFullNameLabelTextBox.Text.Split()[2],
+                    ThingListBox,
+                    LoginTextBox.Text,
+                    PasswordTextBox.Text));
             }
             else
                 _addTeacherHandler(new Teacher(
                     TeacherFullNameLabelTextBox.Text.Split()[0],
                     TeacherFullNameLabelTextBox.Text.Split()[1],
-                    TeacherFullNameLabelTextBox.Text.Split()[2],
-                    ((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Key.ToString(),
+                    TeacherFullNameLabelTextBox.Text.Split()[2],                    
                     ThingListBox,
                     LoginTextBox.Text,
-                    PasswordTextBox.Text));
+                    PasswordTextBox.Text,
+                    ((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Key.ToString()));
         }
 
         private void ThingComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,17 +108,15 @@ namespace BD
 
         private void ReloadDelField()
         {
-            MainForm.DataBase.SetComboBox(LastNameСomboBox, "TEACHER", "LAST_NAME");
-            MainForm.DataBase.SetComboBox(MiddleNameСomboBox, "TEACHER", "MIDDLE_NAME");
-            MainForm.DataBase.SetComboBox(FirstNameСomboBox, "TEACHER", "FIRST_NAME");
+            MainForm.DataBase.SetComboBox(LastNameСomboBox, "TEACHER", "(TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME)");
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM TEACHER " +
                 $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
-                $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
                 $";");
 
             if (count.Count == 0)
@@ -124,15 +128,15 @@ namespace BD
                 string request = ($"DELETE FROM PERSONAL WHERE ID = (" +
                     $"SELECT USER_ID FROM TEACHER " +
                     $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
                     $";");
 
                 MainForm.DataBase.DUIRequest(request, true);
                 request = ($"DELETE FROM TEACHER " +
                     $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
                     $";");
                 _addTeacherHandler(null, request);
                 ReloadDelField();

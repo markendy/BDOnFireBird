@@ -70,7 +70,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddClassForm";
-            this.Text = "AddClassForm";
+            this.Text = "Добавление класса";
             this.ResumeLayout(false);
             this.PerformLayout();
 

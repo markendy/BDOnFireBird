@@ -74,6 +74,12 @@
     <Compile Include="AddForms\AddTeacherForm.Designer.cs">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quests\Print.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quests\Print.Designer.cs">
+      <DependentUpon>Print.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\DataBaseAdapter.cs" />
     <Compile Include="AddForms\AddLessonForm.cs">
       <SubType>Form</SubType>
@@ -134,7 +140,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Quests\Print.resx">
+      <DependentUpon>Print.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Quests\QuestForm.resx">
       <DependentUpon>QuestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconLogin.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

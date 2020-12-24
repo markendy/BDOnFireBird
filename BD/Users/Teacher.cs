@@ -9,7 +9,7 @@ namespace BD
 {
     public class Teacher
     {
-        public Teacher(string lastName, string middleName, string firstName, string cabinet, ListBox thingListBox, string login, string pass)
+        public Teacher(string lastName, string middleName, string firstName, ListBox thingListBox, string login, string pass, string cabinet = "0")
         {
             FirstName = firstName;
             MiddleName = middleName;

@@ -66,6 +66,7 @@
             this.SQ1Bbutton = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.SQ2Bbutton = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -78,7 +79,7 @@
             // Quest1Lable
             // 
             this.Quest1Lable.AutoSize = true;
-            this.Quest1Lable.Location = new System.Drawing.Point(11, 33);
+            this.Quest1Lable.Location = new System.Drawing.Point(11, 60);
             this.Quest1Lable.Name = "Quest1Lable";
             this.Quest1Lable.Size = new System.Drawing.Size(38, 13);
             this.Quest1Lable.TabIndex = 1;
@@ -87,7 +88,7 @@
             // DayOfWeekLable
             // 
             this.DayOfWeekLable.AutoSize = true;
-            this.DayOfWeekLable.Location = new System.Drawing.Point(11, 59);
+            this.DayOfWeekLable.Location = new System.Drawing.Point(11, 86);
             this.DayOfWeekLable.Name = "DayOfWeekLable";
             this.DayOfWeekLable.Size = new System.Drawing.Size(73, 13);
             this.DayOfWeekLable.TabIndex = 3;
@@ -96,7 +97,7 @@
             // NumLessonLable
             // 
             this.NumLessonLable.AutoSize = true;
-            this.NumLessonLable.Location = new System.Drawing.Point(11, 85);
+            this.NumLessonLable.Location = new System.Drawing.Point(11, 112);
             this.NumLessonLable.Name = "NumLessonLable";
             this.NumLessonLable.Size = new System.Drawing.Size(73, 13);
             this.NumLessonLable.TabIndex = 5;
@@ -104,7 +105,7 @@
             // 
             // Q1Button
             // 
-            this.Q1Button.Location = new System.Drawing.Point(14, 128);
+            this.Q1Button.Location = new System.Drawing.Point(14, 155);
             this.Q1Button.Name = "Q1Button";
             this.Q1Button.Size = new System.Drawing.Size(188, 23);
             this.Q1Button.TabIndex = 6;
@@ -115,7 +116,7 @@
             // Q1ClassComboBox
             // 
             this.Q1ClassComboBox.FormattingEnabled = true;
-            this.Q1ClassComboBox.Location = new System.Drawing.Point(88, 30);
+            this.Q1ClassComboBox.Location = new System.Drawing.Point(88, 57);
             this.Q1ClassComboBox.Name = "Q1ClassComboBox";
             this.Q1ClassComboBox.Size = new System.Drawing.Size(111, 21);
             this.Q1ClassComboBox.TabIndex = 7;
@@ -123,7 +124,7 @@
             // Q1WeekComboBox
             // 
             this.Q1WeekComboBox.FormattingEnabled = true;
-            this.Q1WeekComboBox.Location = new System.Drawing.Point(88, 56);
+            this.Q1WeekComboBox.Location = new System.Drawing.Point(88, 83);
             this.Q1WeekComboBox.Name = "Q1WeekComboBox";
             this.Q1WeekComboBox.Size = new System.Drawing.Size(111, 21);
             this.Q1WeekComboBox.TabIndex = 8;
@@ -139,7 +140,7 @@
             "5",
             "6",
             "7"});
-            this.Q1NumberComboBox.Location = new System.Drawing.Point(88, 83);
+            this.Q1NumberComboBox.Location = new System.Drawing.Point(88, 110);
             this.Q1NumberComboBox.Name = "Q1NumberComboBox";
             this.Q1NumberComboBox.Size = new System.Drawing.Size(111, 21);
             this.Q1NumberComboBox.TabIndex = 9;
@@ -147,7 +148,7 @@
             // Q2ClassComboBox
             // 
             this.Q2ClassComboBox.FormattingEnabled = true;
-            this.Q2ClassComboBox.Location = new System.Drawing.Point(89, 33);
+            this.Q2ClassComboBox.Location = new System.Drawing.Point(89, 57);
             this.Q2ClassComboBox.Name = "Q2ClassComboBox";
             this.Q2ClassComboBox.Size = new System.Drawing.Size(111, 21);
             this.Q2ClassComboBox.TabIndex = 11;
@@ -155,7 +156,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 36);
+            this.label1.Location = new System.Drawing.Point(12, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 10;
@@ -163,7 +164,7 @@
             // 
             // Q2Button
             // 
-            this.Q2Button.Location = new System.Drawing.Point(15, 128);
+            this.Q2Button.Location = new System.Drawing.Point(15, 155);
             this.Q2Button.Name = "Q2Button";
             this.Q2Button.Size = new System.Drawing.Size(188, 23);
             this.Q2Button.TabIndex = 12;
@@ -271,10 +272,10 @@
             this.groupBox1.Controls.Add(this.Q1NumberComboBox);
             this.groupBox1.Location = new System.Drawing.Point(15, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 170);
+            this.groupBox1.Size = new System.Drawing.Size(217, 200);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Какой предмет будет в заданном классе, на заданном уроке";
+            this.groupBox1.Text = "Какой предмет будет в заданном классе, на заданном уроке в заданный день недели";
             // 
             // groupBox2
             // 
@@ -283,7 +284,7 @@
             this.groupBox2.Controls.Add(this.Q2Button);
             this.groupBox2.Location = new System.Drawing.Point(252, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(215, 170);
+            this.groupBox2.Size = new System.Drawing.Size(215, 200);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Кто из учителей преподает в заданном классе";
@@ -299,7 +300,7 @@
             this.groupBox3.Controls.Add(this.Q3NumberComboBox);
             this.groupBox3.Location = new System.Drawing.Point(483, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(215, 170);
+            this.groupBox3.Size = new System.Drawing.Size(215, 200);
             this.groupBox3.TabIndex = 25;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "В каком кабинете будет 5-й урок в среду у некоторого класса";
@@ -307,7 +308,7 @@
             // Q3ClassComboBox
             // 
             this.Q3ClassComboBox.FormattingEnabled = true;
-            this.Q3ClassComboBox.Location = new System.Drawing.Point(83, 87);
+            this.Q3ClassComboBox.Location = new System.Drawing.Point(83, 114);
             this.Q3ClassComboBox.Name = "Q3ClassComboBox";
             this.Q3ClassComboBox.Size = new System.Drawing.Size(111, 21);
             this.Q3ClassComboBox.TabIndex = 29;
@@ -315,7 +316,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 90);
+            this.label8.Location = new System.Drawing.Point(6, 117);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 13);
             this.label8.TabIndex = 28;
@@ -324,7 +325,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 63);
+            this.label7.Location = new System.Drawing.Point(6, 90);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(73, 13);
             this.label7.TabIndex = 28;
@@ -333,7 +334,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 35);
+            this.label6.Location = new System.Drawing.Point(6, 62);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 13);
             this.label6.TabIndex = 28;
@@ -342,14 +343,14 @@
             // Q3WeekComboBox
             // 
             this.Q3WeekComboBox.FormattingEnabled = true;
-            this.Q3WeekComboBox.Location = new System.Drawing.Point(83, 60);
+            this.Q3WeekComboBox.Location = new System.Drawing.Point(83, 87);
             this.Q3WeekComboBox.Name = "Q3WeekComboBox";
             this.Q3WeekComboBox.Size = new System.Drawing.Size(111, 21);
             this.Q3WeekComboBox.TabIndex = 29;
             // 
             // Q3Button
             // 
-            this.Q3Button.Location = new System.Drawing.Point(6, 128);
+            this.Q3Button.Location = new System.Drawing.Point(6, 155);
             this.Q3Button.Name = "Q3Button";
             this.Q3Button.Size = new System.Drawing.Size(188, 23);
             this.Q3Button.TabIndex = 13;
@@ -368,7 +369,7 @@
             "5",
             "6",
             "7"});
-            this.Q3NumberComboBox.Location = new System.Drawing.Point(83, 33);
+            this.Q3NumberComboBox.Location = new System.Drawing.Point(83, 60);
             this.Q3NumberComboBox.Name = "Q3NumberComboBox";
             this.Q3NumberComboBox.Size = new System.Drawing.Size(111, 21);
             this.Q3NumberComboBox.TabIndex = 29;
@@ -380,7 +381,7 @@
             this.groupBox4.Controls.Add(this.Q4ThingComboBox);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Location = new System.Drawing.Point(17, 187);
+            this.groupBox4.Location = new System.Drawing.Point(17, 218);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(215, 170);
             this.groupBox4.TabIndex = 26;
@@ -394,7 +395,7 @@
             this.groupBox5.Controls.Add(this.Q5ClassComboBox);
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Location = new System.Drawing.Point(252, 187);
+            this.groupBox5.Location = new System.Drawing.Point(252, 218);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(215, 170);
             this.groupBox5.TabIndex = 27;
@@ -406,7 +407,7 @@
             this.groupBox6.Controls.Add(this.SQ1ClassComboBox);
             this.groupBox6.Controls.Add(this.label9);
             this.groupBox6.Controls.Add(this.SQ1Bbutton);
-            this.groupBox6.Location = new System.Drawing.Point(17, 374);
+            this.groupBox6.Location = new System.Drawing.Point(17, 447);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(215, 170);
             this.groupBox6.TabIndex = 28;
@@ -443,7 +444,7 @@
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.SQ2Bbutton);
-            this.groupBox7.Location = new System.Drawing.Point(252, 374);
+            this.groupBox7.Location = new System.Drawing.Point(252, 447);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(215, 170);
             this.groupBox7.TabIndex = 29;
@@ -460,6 +461,15 @@
             this.SQ2Bbutton.UseVisualStyleBackColor = true;
             this.SQ2Bbutton.Click += new System.EventHandler(this.SQ2Bbutton_Click);
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Location = new System.Drawing.Point(17, 413);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(450, 221);
+            this.groupBox8.TabIndex = 30;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Отчеты";
+            // 
             // QuestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,10 +482,11 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox8);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "QuestForm";
-            this.Text = "QuestForm";
+            this.Text = "Служебная форма";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -532,5 +543,6 @@
         private System.Windows.Forms.Button SQ1Bbutton;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button SQ2Bbutton;
+        private System.Windows.Forms.GroupBox groupBox8;
     }
 }

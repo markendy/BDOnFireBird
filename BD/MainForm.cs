@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -155,27 +156,38 @@ namespace BD
 
         private void OBSTeacher_Click(object sender, EventArgs e)
         {
-            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM TEACHER"));
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT (TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME) as \"Преподаватель\", CABINET.NUMBER as \"Кабинет\" FROM TEACHER " +
+                $"LEFT JOIN CABINET ON(TEACHER.CABINET_ID = CABINET.ID) ORDER BY \"Преподаватель\"")); ;
         }
 
         private void OBSClass_Click(object sender, EventArgs e)
         {
-            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM CLASS"));
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT CLASS.NAME as \"Класс\" FROM CLASS ORDER BY \"Класс\";"));
         }
 
         private void OBSStudent_Click(object sender, EventArgs e)
         {
-            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM STUDENT"));
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT (STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME) as \"Ученик\", CLASS.NAME as \"Класс\" FROM STUDENT " +
+                $"JOIN CLASS ON(STUDENT.CLASS_ID = CLASS.ID) ORDER BY \"Ученик\";"));
         }
 
         private void OBSLesson_Click(object sender, EventArgs e)
         {
-            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM LESSON"));
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT  LESSON.\"DATE\" as \"Дата\", LESSON.NUMBER AS \"Номер урока\", CABINET.NUMBER AS \"Кабинет\", CLASS.NAME as \"Класс\", THING.NAME as \"Предмет\" ,(TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME) as \"Преподаватель\" FROM LESSON " +
+                $"JOIN CABINET ON (LESSON.CABINET_ID = CABINET.ID) " +
+                $"JOIN TEACHER ON (LESSON.TEACHER_ID = TEACHER.ID) " +
+                $"JOIN CLASS ON (LESSON.CLASS_ID = CLASS.ID) " +
+                $"JOIN THING ON (LESSON.THING_ID = THING.ID) " +
+                $"ORDER BY \"Дата\";"));
         }
 
         private void OBSScore_Click(object sender, EventArgs e)
         {
-            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM PERFORMANCE"));
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT " +
+                $"PERFORMANCE.\"DATA\" as \"Дата\", PERFORMANCE.SCORE as \"Оценка\", (STUDENT.LAST_NAME || STUDENT.FIRST_NAME) as \"Ученик\", THING.NAME as \"Предмет\" FROM PERFORMANCE " +
+                $"JOIN STUDENT ON (PERFORMANCE.STUDENT_ID = STUDENT.ID) " +
+                $"JOIN THING ON (PERFORMANCE.THING_ID = THING.ID)" +
+                $"ORDER BY \"Дата\";"));
         }
 
         //========================================================
@@ -186,7 +198,7 @@ namespace BD
         {
             _tableView.CreateMainTableView(DataBase.SelectRequest(request));
 
-            //Apply(_quest1Form);
+            ShowSucsess();
         }
 
         private void Logined()
@@ -215,7 +227,7 @@ namespace BD
 
             ShowSucsess();
 
-            _tableView.CreateMainTableView(DataBase.ShowOnMainTable("PERFORMANCE"));
+            //_tableView.CreateMainTableView(DataBase.ShowOnMainTable("PERFORMANCE"));
         }
 
         private void AddTeacher(Teacher teacher = null, string request = null)
@@ -240,7 +252,7 @@ namespace BD
             
             ShowSucsess();
 
-            _tableView.CreateMainTableView(DataBase.ShowOnMainTable("TEACHER"));
+            //_tableView.CreateMainTableView(DataBase.ShowOnMainTable("TEACHER"));
         }
 
         private void AddClass(string request)
@@ -259,7 +271,6 @@ namespace BD
                 var lastIdUser = DataBase.RequestWithReturnId($"INSERT INTO PERSONAL VALUES(null, '{student.Login}','{student.Password}','STUDENT') RETURNING ID;", true);
                 DataBase.DUIRequest($"INSERT INTO STUDENT VALUES(null, '{student.FirstName}', '{student.LastName}', {student.Class}, {lastIdUser});", true);              
 
-                _tableView.CreateMainTableView(DataBase.ShowOnMainTable("STUDENT"));
             }
             else
             {
@@ -267,7 +278,7 @@ namespace BD
             }
             ShowSucsess();
 
-            _tableView.CreateMainTableView(DataBase.ShowOnMainTable("STUDENT"));
+            //_tableView.CreateMainTableView(DataBase.ShowOnMainTable("STUDENT"));
         }
 
         private void AddLesson(string request)
@@ -276,7 +287,7 @@ namespace BD
 
             ShowSucsess();
 
-            _tableView.CreateMainTableView(DataBase.ShowOnMainTable("LESSON"));
+            //_tableView.CreateMainTableView(DataBase.ShowOnMainTable("LESSON"));
         }
 
         private void CloseWindow(Form form)

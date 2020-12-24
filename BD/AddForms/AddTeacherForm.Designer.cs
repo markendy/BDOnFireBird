@@ -45,9 +45,7 @@
             this.AddCabinetButton = new System.Windows.Forms.Button();
             this.LastNameСomboBox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.DelTeacherLabel = new System.Windows.Forms.Label();
-            this.MiddleNameСomboBox = new System.Windows.Forms.ComboBox();
-            this.FirstNameСomboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TeacherFullNameLabelTextBox
@@ -182,54 +180,36 @@
             // LastNameСomboBox
             // 
             this.LastNameСomboBox.FormattingEnabled = true;
-            this.LastNameСomboBox.Location = new System.Drawing.Point(395, 226);
+            this.LastNameСomboBox.Location = new System.Drawing.Point(387, 226);
             this.LastNameСomboBox.Name = "LastNameСomboBox";
-            this.LastNameСomboBox.Size = new System.Drawing.Size(110, 21);
+            this.LastNameСomboBox.Size = new System.Drawing.Size(212, 21);
             this.LastNameСomboBox.TabIndex = 16;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(393, 265);
+            this.button1.Location = new System.Drawing.Point(387, 265);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(344, 23);
+            this.button1.Size = new System.Drawing.Size(212, 23);
             this.button1.TabIndex = 17;
             this.button1.Text = "Удалить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
-            // DelTeacherLabel
+            // label1
             // 
-            this.DelTeacherLabel.AutoSize = true;
-            this.DelTeacherLabel.Location = new System.Drawing.Point(548, 199);
-            this.DelTeacherLabel.Name = "DelTeacherLabel";
-            this.DelTeacherLabel.Size = new System.Drawing.Size(49, 13);
-            this.DelTeacherLabel.TabIndex = 20;
-            this.DelTeacherLabel.Text = "Учитель";
-            // 
-            // MiddleNameСomboBox
-            // 
-            this.MiddleNameСomboBox.FormattingEnabled = true;
-            this.MiddleNameСomboBox.Location = new System.Drawing.Point(511, 226);
-            this.MiddleNameСomboBox.Name = "MiddleNameСomboBox";
-            this.MiddleNameСomboBox.Size = new System.Drawing.Size(110, 21);
-            this.MiddleNameСomboBox.TabIndex = 21;
-            // 
-            // FirstNameСomboBox
-            // 
-            this.FirstNameСomboBox.FormattingEnabled = true;
-            this.FirstNameСomboBox.Location = new System.Drawing.Point(627, 226);
-            this.FirstNameСomboBox.Name = "FirstNameСomboBox";
-            this.FirstNameСomboBox.Size = new System.Drawing.Size(110, 21);
-            this.FirstNameСomboBox.TabIndex = 22;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(476, 210);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "ФИО";
             // 
             // AddTeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 300);
-            this.Controls.Add(this.FirstNameСomboBox);
-            this.Controls.Add(this.MiddleNameСomboBox);
-            this.Controls.Add(this.DelTeacherLabel);
+            this.ClientSize = new System.Drawing.Size(629, 300);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.LastNameСomboBox);
             this.Controls.Add(this.AddCabinetButton);
@@ -250,7 +230,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
             this.Name = "AddTeacherForm";
-            this.Text = "AddTeacher";
+            this.Text = "Добавление учителя";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,8 +255,6 @@
         private System.Windows.Forms.Button AddCabinetButton;
         private System.Windows.Forms.ComboBox LastNameСomboBox;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label DelTeacherLabel;
-        private System.Windows.Forms.ComboBox MiddleNameСomboBox;
-        private System.Windows.Forms.ComboBox FirstNameСomboBox;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -29,3 +29,4 @@ E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddClassForm.resourc
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddStudentForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.AddLessonForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.QuestForm.resources
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Debug\BD.Print.resources

@@ -75,7 +75,7 @@ namespace BD
 
         private void ThingComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var items = MainForm.DataBase.SelectRequest($"SELECT TEACHER.ID, TEACHER.LAST_NAME FROM TEACHER " +
+            var items = MainForm.DataBase.SelectRequest($"SELECT TEACHER.ID, (TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME) FROM TEACHER " +
                 $"JOIN BIND_TEACHER_THING ON (BIND_TEACHER_THING.TEACHER_ID = TEACHER.ID) " +
                 $"WHERE BIND_TEACHER_THING.THING_ID = {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key};");  
             MainForm.DataBase.SetComboBox(items, TeacherComboBox);

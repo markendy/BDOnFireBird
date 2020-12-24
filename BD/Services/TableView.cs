@@ -74,7 +74,7 @@ namespace BD
             }
             else
             {
-                MessageBox.Show("Данные отсутствуют");
+                MessageBox.Show("Данные по запросу отсутствуют");
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace BD
             }
         }
 
-        public void CreateMainTableView(List<Dictionary<object, object>> list)
+        public void CreateMainTableView(List<Dictionary<object, object>> list, bool isComboBox = false)
         {
             _answer = list;
             _dataGridView.Rows.Clear();
@@ -129,11 +129,12 @@ namespace BD
                 _dataGridView.Columns.Clear();
                 var str = _answer[0];
                 foreach (var title in str.Keys)
-                    AddColumn(title.ToString(), true);
+                    AddColumn(title.ToString(), false);
             }
             else
             {
-                MessageBox.Show("Данные отсутствуют");
+                if(!isComboBox)
+                    MessageBox.Show("Данные по запросу отсутствуют");
                 return;
             }
             ShowMainTable();

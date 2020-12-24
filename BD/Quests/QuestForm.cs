@@ -62,7 +62,7 @@ namespace BD
             if (Q1NumberComboBox.SelectedItem != null)
             {
                 //_request = $"SELECT NAME FROM THING, LESSON WHERE LESSON.THING_ID = ID AND DATE = {DayOfWeekTextBox.Text} AND CLASS_ID = (SELECT ID FROM CLASS WHERE NAME = '{ClassTextBox.Text}') AND LESSON.NUMBER = {NumLessonTextBox.Text};";
-                _request = $"SELECT THING.NAME FROM THING JOIN LESSON ON (LESSON.THING_ID = THING.ID) " +
+                _request = $"SELECT THING.NAME as \"Предмет\" FROM THING JOIN LESSON ON (LESSON.THING_ID = THING.ID) " +
                     $"WHERE LESSON.CLASS_ID = {((KeyValuePair<object, object>)Q1ClassComboBox.SelectedItem).Key.ToString()} " +
                     $"AND EXTRACT(WEEKDAY FROM LESSON.\"DATE\") = {((KeyValuePair<object, object>)Q1WeekComboBox.SelectedItem).Key.ToString()} " +
                     $"AND LESSON.NUMBER = {Q1NumberComboBox.Text.ToString()}";
@@ -76,7 +76,7 @@ namespace BD
 
         private void Q2Button_Click(object sender, EventArgs e)
         {
-            _request = $"SELECT TEACHER.LAST_NAME FROM TEACHER JOIN LESSON ON (LESSON.TEACHER_ID = TEACHER.ID) " +
+            _request = $"SELECT (TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME) as \"Преподаватель\" FROM TEACHER JOIN LESSON ON (LESSON.TEACHER_ID = TEACHER.ID) " +
                 $"JOIN CLASS ON (LESSON.CLASS_ID = CLASS.ID) " +
                 $"WHERE CLASS.ID = {((KeyValuePair<object, object>)Q2ClassComboBox.SelectedItem).Key.ToString()}";
             _quest1Handler(_request);
@@ -84,7 +84,7 @@ namespace BD
 
         private void Q4Button_Click(object sender, EventArgs e)
         {
-            _request = $"SELECT DISTINCT CLASS.NAME FROM CLASS JOIN LESSON ON (LESSON.CLASS_ID = CLASS.ID) " +
+            _request = $"SELECT DISTINCT CLASS.NAME as \"Класс\" FROM CLASS JOIN LESSON ON (LESSON.CLASS_ID = CLASS.ID) " +
                 $"JOIN TEACHER ON (LESSON.TEACHER_ID = TEACHER.ID) " +
                 $"WHERE LESSON.THING_ID = {((KeyValuePair<object, object>)Q4ThingComboBox.SelectedItem).Key.ToString()} " +
                 $"AND LESSON.TEACHER_ID = {((KeyValuePair<object, object>)Q4TeacherComboBox.SelectedItem).Key.ToString()};";
@@ -112,7 +112,7 @@ namespace BD
         {
             if (Q3NumberComboBox.SelectedItem != null)
             {
-                _request = $"SELECT CABINET.NUMBER FROM CABINET " +
+                _request = $"SELECT CABINET.NUMBER as \"Кабинет\"FROM CABINET " +
                 $"JOIN LESSON ON (LESSON.CABINET_ID = CABINET.ID) " +
                 $"JOIN CLASS ON (CLASS.ID = LESSON.CLASS_ID) " +
                 $"WHERE CLASS.ID = {((KeyValuePair<object, object>)Q3ClassComboBox.SelectedItem).Key.ToString()} " +
@@ -130,16 +130,30 @@ namespace BD
         {
             _request = $"SELECT 'Количество учеников, в {((KeyValuePair<object, object>)SQ1ClassComboBox.SelectedItem).Value} классе', COUNT(STUDENT.ID) FROM STUDENT " +
                 $"JOIN CLASS ON (STUDENT.CLASS_ID = CLASS.ID) " +
-                $"WHERE STUDENT.CLASS_ID = {((KeyValuePair<object, object>)SQ1ClassComboBox.SelectedItem).Key.ToString()}";            
-            _tableSQuest.WriteInFile(MainForm.DataBase.SelectRequest(_request), "SQ4.txt");
+                $"WHERE STUDENT.CLASS_ID = {((KeyValuePair<object, object>)SQ1ClassComboBox.SelectedItem).Key.ToString()}";
+            var items = MainForm.DataBase.SelectRequest(_request);
+            Print print = new Print(new string[] { "Количестве учеников, в заданом классе" }, items);
+            print.Show();
+            //_tableSQuest.WriteInFile(MainForm.DataBase.SelectRequest(_request), "SQ4.txt");
         }
 
         private void SQ2Bbutton_Click(object sender, EventArgs e)
         {
-            _request = $"SELECT 'Количество кабинетов', COUNT(CABINET.ID) FROM STUDENT " +
-                $"JOIN CLASS ON (STUDENT.CLASS_ID = CLASS.ID) " +
-                $"WHERE STUDENT.CLASS_ID = {((KeyValuePair<object, object>)SQ1ClassComboBox.SelectedItem).Key.ToString()}";
-            _tableSQuest.WriteInFile(MainForm.DataBase.SelectRequest(_request));
+            _request = $"SELECT 'Колличество учителей по', THING.NAME, COUNT(TEACHER.ID) FROM TEACHER " +
+                $"JOIN BIND_TEACHER_THING ON(TEACHER.ID = BIND_TEACHER_THING.TEACHER_ID) " +
+                $"JOIN THING ON (BIND_TEACHER_THING.THING_ID = THING.ID) GROUP BY THING.NAME;";
+            var items1 = MainForm.DataBase.SelectRequest(_request);
+            _request = $"SELECT 'Кол-во кабинетов в школе', COUNT(ID) FROM CABINET;";
+            var items2 = MainForm.DataBase.SelectRequest(_request);
+            _request = $"SELECT  'Кол-во учеников в классе', CLASS.NAME, COUNT(STUDENT.ID) FROM STUDENT " +
+                $"JOIN CLASS ON(STUDENT.CLASS_ID = CLASS.ID) " +
+                $"GROUP BY CLASS.NAME;";
+            var items3 = MainForm.DataBase.SelectRequest(_request);
+            _request = $"SELECT  'Кол-во учеников в школе', COUNT(STUDENT.ID) FROM STUDENT;";
+            var items4 = MainForm.DataBase.SelectRequest(_request);
+            Print print = new Print(new string[] { "Количество учителей по предметам", "Количество кабинетов", "Число учеников в каждом классе", "Число учеников в школе" }, items1, items2, items3, items4);
+            print.Show();
+            //_tableSQuest.WriteInFile(MainForm.DataBase.SelectRequest(_request), "SQ5.txt");
         }
     }
 }

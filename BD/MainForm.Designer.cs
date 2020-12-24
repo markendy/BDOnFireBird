@@ -184,14 +184,14 @@
             this.ReqView.Multiline = true;
             this.ReqView.Name = "ReqView";
             this.ReqView.ReadOnly = true;
-            this.ReqView.Size = new System.Drawing.Size(622, 45);
+            this.ReqView.Size = new System.Drawing.Size(622, 89);
             this.ReqView.TabIndex = 15;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 586);
+            this.ClientSize = new System.Drawing.Size(646, 630);
             this.Controls.Add(this.ReqView);
             this.Controls.Add(this.OBSLesson);
             this.Controls.Add(this.OBSStudent);
@@ -209,7 +209,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Главная форма";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);
