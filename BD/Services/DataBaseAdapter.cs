@@ -11,6 +11,12 @@ namespace BD
     public class DataBaseAdapter
     {
         private FbConnection _fbCon;
+        private TextBox reqShow;
+
+        public DataBaseAdapter(TextBox label)
+        {
+            reqShow = label;
+        }
 
         public string CheckUser(User user)
         {
@@ -21,10 +27,12 @@ namespace BD
             return type.ToString();
         }
 
-        public void Connect(string user, string role = "OBS")
+        public string Connect(string user, string role = "OBS")
         {
             if (user == "TEACHER")
                 role = "EDITOR";
+            if (user == "SYSDBA")
+                role = "ADMIN";
             FbConnectionStringBuilder fb_cons = new FbConnectionStringBuilder();
             fb_cons.Charset = "UTF8";
             fb_cons.Dialect = 3;
@@ -36,7 +44,8 @@ namespace BD
             fb_cons.Pooling = true;
             fb_cons.Database = @"E:\Comp 5.0\Life on vuz\VUZ\Semestr 5\BD\FireBirdEmbedx64\SHOOLK2";
             fb_cons.ServerType = FbServerType.Default;
-            _fbCon = new FbConnection(fb_cons.ToString());                    
+            _fbCon = new FbConnection(fb_cons.ToString());
+            return role;
         }
 
         public object RequestWithReturnId(string request, bool isCommit)
@@ -58,6 +67,7 @@ namespace BD
             catch (FbException e)
             {
                 MessageBox.Show("Ошибка "+e.Message);
+                MainForm.IsResultOk = false;
                 _fbCon.Close();
                 return 0;
             }
@@ -81,6 +91,7 @@ namespace BD
             else
             {
                 MessageBox.Show("Одна из выборок пуста");
+                MainForm.IsResultOk = false;
                 comboBox.DataSource = new BindingSource(null, null);
             }
             comboBox.DisplayMember = "Value";
@@ -107,6 +118,7 @@ namespace BD
             else
             {
                 MessageBox.Show("Одна из выборок пуста");
+                MainForm.IsResultOk = false;
                 comboBox.DataSource = new BindingSource(null, null);
             }
             comboBox.DisplayMember = "Value";
@@ -128,10 +140,12 @@ namespace BD
                 else
                     transaction.Rollback();
                 _fbCon.Close();
+                reqShow.Text = request;
             }
             catch (FbException e)
             {
                 MessageBox.Show("Ошибка " + e.Message);
+                MainForm.IsResultOk = false;
                 _fbCon.Close();
             }
         }
@@ -157,11 +171,13 @@ namespace BD
                 }
                 dataReader.Close();
                 _fbCon.Close();
+                reqShow.Text = request;
                 return answer;
             }
             catch (FbException e)
             {
                 MessageBox.Show("Ошибка " + e.Message);
+                MainForm.IsResultOk = false;
                 _fbCon.Close();
                 return new List<Dictionary< object, object>>();;
             }
@@ -187,6 +203,7 @@ namespace BD
                 }
                 dataReader.Close();
                 _fbCon.Close();
+                reqShow.Text = request;
                 if (answer != null)
                     return answer;
                 return new List<Dictionary<object, object>>();
@@ -194,6 +211,7 @@ namespace BD
             catch (FbException e)
             {
                 MessageBox.Show("Ошибка " + e.Message);
+                MainForm.IsResultOk = false;
                 _fbCon.Close();
                 return new List<Dictionary<object, object>>();
             }

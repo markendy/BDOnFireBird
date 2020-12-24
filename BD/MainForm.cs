@@ -24,16 +24,42 @@ namespace BD
         public static DataBaseAdapter DataBase;
         private TableView _tableView;
 
+        private List<Button> forStudent;
+        private List<Button> forTeacher;
+        private List<Button> forAdmin;
+
+        public static bool IsResultOk = true;
+
         public delegate void RequestrDelegate(string request);
 
         public MainForm()
         {
             InitializeComponent();
 
-            DataBase = new DataBaseAdapter();
+            DataBase = new DataBaseAdapter(ReqView);
             _tableView = new TableView(DataGridView);
 
             // SYSTEM :: _tableView.CreateMainTableView(_dataBase.SelectRequest("select * from sec$users;"));
+
+            forStudent = new List<Button>();
+            forStudent.Add(OBSClass);
+            forStudent.Add(OBSLesson);
+            forStudent.Add(OBSScore);
+            forStudent.Add(OBSStudent);
+            forStudent.Add(OBSTeacher);
+
+            forTeacher = new List<Button>();
+            forTeacher.Add(AddShoolGradeButton);
+
+            forAdmin = new List<Button>();
+            forAdmin.Add(AddTeacherButton);
+            forAdmin.Add(ClassAddButton);
+            forAdmin.Add(AddStudentButton);
+            forAdmin.Add(AddLessonButton);
+            forAdmin.Add(AddShoolGradeButton);
+            forAdmin.Add(QuestButton);
+            forAdmin.Add(AddLessonButton);
+            forAdmin.Add(OBSTeacher);
 
             _loginForm = new LoginForm(Logined);
             _loginForm.Show();
@@ -44,6 +70,46 @@ namespace BD
         private void MainForm_Shown(object sender, EventArgs e)
         {
             Visible = false;
+        }
+
+        private void VisualSet(string role)
+        {
+            if (role == "OBS")
+                ShowForStudent();
+            else if (role == "EDITOR")
+            {
+                ShowForTeacher();
+            }
+            else
+            {
+                ShowForAdmin();
+            }
+        }
+
+        private void ShowForStudent()
+        {
+            foreach(var butt in forStudent)
+            {
+                butt.Visible = true;
+            }
+        }
+
+        private void ShowForTeacher()
+        {
+            ShowForStudent();
+            foreach (var butt in forTeacher)
+            {
+                butt.Visible = true;
+            }
+        }
+
+        private void ShowForAdmin()
+        {
+            ShowForTeacher();
+            foreach (var butt in forAdmin)
+            {
+                butt.Visible = true;
+            }
         }
 
         //========================================================
@@ -62,7 +128,7 @@ namespace BD
             _addTeacherForm.Show();
         }
 
-        private void Quest1Button_Click(object sender, EventArgs e)
+        private void QuestButton_Click(object sender, EventArgs e)
         {
             _quest1Form = new QuestForm(Quest);
             _quest1Form.Show();
@@ -87,6 +153,30 @@ namespace BD
             _addLessonForm.Show();
         }
 
+        private void OBSTeacher_Click(object sender, EventArgs e)
+        {
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM TEACHER"));
+        }
+
+        private void OBSClass_Click(object sender, EventArgs e)
+        {
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM CLASS"));
+        }
+
+        private void OBSStudent_Click(object sender, EventArgs e)
+        {
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM STUDENT"));
+        }
+
+        private void OBSLesson_Click(object sender, EventArgs e)
+        {
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM LESSON"));
+        }
+
+        private void OBSScore_Click(object sender, EventArgs e)
+        {
+            _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT * FROM PERFORMANCE"));
+        }
 
         //========================================================
         // Outside method
@@ -96,7 +186,7 @@ namespace BD
         {
             _tableView.CreateMainTableView(DataBase.SelectRequest(request));
 
-            CloseWindow(_quest1Form);
+            //Apply(_quest1Form);
         }
 
         private void Logined()
@@ -105,16 +195,17 @@ namespace BD
             var login = DataBase.CheckUser(User);
             if (login != "")
             {
-                DataBase.Connect(login);
-                Show();
+                string role = DataBase.Connect(login);
 
+                Show();
                 CloseWindow(_loginForm);
 
-                _tableView.CreateMainTableView(DataBase.ShowOnMainTable("PERSONAL"));
+                VisualSet(role);
             }
             else
             {
                 MessageBox.Show("Неверный логин или пароль");
+                MainForm.IsResultOk = false;
             }
         }
 
@@ -122,7 +213,7 @@ namespace BD
         {
             DataBase.DUIRequest(request, true);
 
-            CloseWindow(_addShoolGradeForm);
+            ShowSucsess();
 
             _tableView.CreateMainTableView(DataBase.ShowOnMainTable("PERFORMANCE"));
         }
@@ -145,12 +236,9 @@ namespace BD
             else
             {
                 DataBase.DUIRequest(request, true);
-
-                CloseWindow(_addTeacherForm);
-
-                _tableView.CreateMainTableView(DataBase.ShowOnMainTable("TEACHER"));
             }
-            CloseWindow(_addTeacherForm);
+            
+            ShowSucsess();
 
             _tableView.CreateMainTableView(DataBase.ShowOnMainTable("TEACHER"));
         }
@@ -159,18 +247,25 @@ namespace BD
         {
             DataBase.RequestWithReturnId(request, true);
 
-            CloseWindow(_addClassForm);
+            ShowSucsess();
 
             _tableView.CreateMainTableView(DataBase.ShowOnMainTable("CLASS"));
         }
 
-        private void AddStudent(Student student)
+        private void AddStudent(Student student, string request)
         {
-            var lastIdUser = DataBase.RequestWithReturnId($"INSERT INTO PERSONAL VALUES(null, '{student.Login}','{student.Password}','STUDENT') RETURNING ID;", true);
-            DataBase.DUIRequest($"INSERT INTO STUDENT VALUES(null, '{student.FirstName}', '{student.LastName}', {student.Class}, {lastIdUser});", true);
+            if (request == null)
+            {
+                var lastIdUser = DataBase.RequestWithReturnId($"INSERT INTO PERSONAL VALUES(null, '{student.Login}','{student.Password}','STUDENT') RETURNING ID;", true);
+                DataBase.DUIRequest($"INSERT INTO STUDENT VALUES(null, '{student.FirstName}', '{student.LastName}', {student.Class}, {lastIdUser});", true);              
 
-
-            CloseWindow(_addStudentForm);
+                _tableView.CreateMainTableView(DataBase.ShowOnMainTable("STUDENT"));
+            }
+            else
+            {
+                DataBase.DUIRequest(request, true);
+            }
+            ShowSucsess();
 
             _tableView.CreateMainTableView(DataBase.ShowOnMainTable("STUDENT"));
         }
@@ -179,7 +274,7 @@ namespace BD
         {
             DataBase.DUIRequest(request, true);
 
-            CloseWindow(_addLessonForm);
+            ShowSucsess();
 
             _tableView.CreateMainTableView(DataBase.ShowOnMainTable("LESSON"));
         }
@@ -188,6 +283,13 @@ namespace BD
         {
             form.Dispose();
             form.Close();
+        }
+
+        private void ShowSucsess()
+        {
+            if (IsResultOk)
+                MessageBox.Show("Действие завершено успешно");
+            IsResultOk = true;
         }
     }
 }

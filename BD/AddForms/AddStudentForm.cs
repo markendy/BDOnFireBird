@@ -10,16 +10,30 @@ using System.Windows.Forms;
 
 namespace BD
 {
-    public partial class AddStudentForm : Form
+    public partial class AddStudentForm : Form, IDisposable
     {
-        public delegate void StudentDelegate(Student student);
+        public delegate void StudentDelegate(Student student = null, string req = null);
         private event StudentDelegate _addStudentHandler;
 
         public AddStudentForm(StudentDelegate requestrDelegate)
         {
             InitializeComponent();
             MainForm.DataBase.SetComboBox(StudentClassComboBox, "CLASS", "NAME");
+
+            ReloadDelField();
+
             _addStudentHandler += requestrDelegate;
+        }
+
+        public new void Dispose()
+        {
+            _addStudentHandler = null;
+        }
+
+        private void ReloadDelField()
+        {
+            MainForm.DataBase.SetComboBox(DelFirstNameComboBox, "STUDENT", "LAST_NAME");
+            MainForm.DataBase.SetComboBox(DelLastNameComboBox, "STUDENT", "FIRST_NAME");
         }
 
         private void AddStudentButton_Click(object sender, EventArgs e)
@@ -31,37 +45,34 @@ namespace BD
             else
                 MessageBox.Show("Некоторые поля пусты");
         }
-        /*
-        private void DelStud()
+        
+        private void DelStud(object sender, EventArgs e)
         {
-            var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM TEACHER " +
-                $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
-                $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+            var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM STUDENT " +
+                $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Value.ToString()}'" +
+                $"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                 $";");
 
             if (count.Count == 0)
             {
-                MessageBox.Show("Преподавателя нет");
+                MessageBox.Show("Студента нет");
             }
             else
             {
                 string request = ($"DELETE FROM PERSONAL WHERE ID in (" +
-                    $"SELECT USER_ID FROM TEACHER " +
-                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $"SELECT USER_ID FROM STUDENT " +
+                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Value.ToString()}'" +
+                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                     $");");
 
                 MainForm.DataBase.DUIRequest(request, true);
-                request = ($"DELETE FROM TEACHER " +
-                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                request = ($"DELETE FROM STUDENT " +
+                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Value.ToString()}'" +
+                    $"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                     $";");
-                _addTeacherHandler(null, request);
+                _addStudentHandler(null, request);
                 ReloadDelField();
             }
-        }*/
+        }
     }
 }

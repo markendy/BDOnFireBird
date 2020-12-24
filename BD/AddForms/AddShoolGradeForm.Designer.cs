@@ -36,10 +36,13 @@
             this.StudentaNameLabel = new System.Windows.Forms.Label();
             this.ThingComboBox = new System.Windows.Forms.ComboBox();
             this.ClassComboBox = new System.Windows.Forms.ComboBox();
-            this.ShoolGradeLabelComboBox = new System.Windows.Forms.ComboBox();
+            this.ShoolGradeomboBox = new System.Windows.Forms.ComboBox();
             this.Calendar = new System.Windows.Forms.MonthCalendar();
             this.DataTextBox = new System.Windows.Forms.TextBox();
             this.StudentComboBox = new System.Windows.Forms.ComboBox();
+            this.EditButton = new System.Windows.Forms.Button();
+            this.dataGridViewEdit = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEdit)).BeginInit();
             this.SuspendLayout();
             // 
             // ThingLabel
@@ -87,7 +90,7 @@
             this.AddButton.Location = new System.Drawing.Point(11, 164);
             this.AddButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(265, 24);
+            this.AddButton.Size = new System.Drawing.Size(130, 24);
             this.AddButton.TabIndex = 9;
             this.AddButton.Text = "Поставить";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -125,20 +128,20 @@
             this.ClassComboBox.TabIndex = 16;
             this.ClassComboBox.SelectedIndexChanged += new System.EventHandler(this.ClassComboBoxSelectedIndexChanged);
             // 
-            // ShoolGradeLabelComboBox
+            // ShoolGradeomboBox
             // 
-            this.ShoolGradeLabelComboBox.FormattingEnabled = true;
-            this.ShoolGradeLabelComboBox.Items.AddRange(new object[] {
+            this.ShoolGradeomboBox.FormattingEnabled = true;
+            this.ShoolGradeomboBox.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
             "4",
             "5"});
-            this.ShoolGradeLabelComboBox.Location = new System.Drawing.Point(91, 99);
-            this.ShoolGradeLabelComboBox.Name = "ShoolGradeLabelComboBox";
-            this.ShoolGradeLabelComboBox.Size = new System.Drawing.Size(185, 21);
-            this.ShoolGradeLabelComboBox.TabIndex = 17;
-            this.ShoolGradeLabelComboBox.SelectedIndexChanged += new System.EventHandler(this.ShoolGradeLabelComboBoxSelectedIndexChanged);
+            this.ShoolGradeomboBox.Location = new System.Drawing.Point(91, 99);
+            this.ShoolGradeomboBox.Name = "ShoolGradeomboBox";
+            this.ShoolGradeomboBox.Size = new System.Drawing.Size(185, 21);
+            this.ShoolGradeomboBox.TabIndex = 17;
+            this.ShoolGradeomboBox.SelectedIndexChanged += new System.EventHandler(this.ShoolGradeLabelComboBoxSelectedIndexChanged);
             // 
             // Calendar
             // 
@@ -171,11 +174,32 @@
             this.StudentComboBox.TabIndex = 21;
             this.StudentComboBox.SelectedIndexChanged += new System.EventHandler(this.StudentComboBoxSelectedIndexChanged);
             // 
+            // EditButton
+            // 
+            this.EditButton.Location = new System.Drawing.Point(145, 164);
+            this.EditButton.Margin = new System.Windows.Forms.Padding(2);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(130, 24);
+            this.EditButton.TabIndex = 22;
+            this.EditButton.Text = "Изменить";
+            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // dataGridViewEdit
+            // 
+            this.dataGridViewEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEdit.Location = new System.Drawing.Point(296, 9);
+            this.dataGridViewEdit.Name = "dataGridViewEdit";
+            this.dataGridViewEdit.Size = new System.Drawing.Size(472, 181);
+            this.dataGridViewEdit.TabIndex = 23;
+            // 
             // AddShoolGradeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 202);
+            this.ClientSize = new System.Drawing.Size(780, 202);
+            this.Controls.Add(this.dataGridViewEdit);
+            this.Controls.Add(this.EditButton);
             this.Controls.Add(this.Calendar);
             this.Controls.Add(this.StudentaNameLabel);
             this.Controls.Add(this.AddButton);
@@ -184,7 +208,7 @@
             this.Controls.Add(this.ClassLabel);
             this.Controls.Add(this.ThingLabel);
             this.Controls.Add(this.DataTextBox);
-            this.Controls.Add(this.ShoolGradeLabelComboBox);
+            this.Controls.Add(this.ShoolGradeomboBox);
             this.Controls.Add(this.StudentComboBox);
             this.Controls.Add(this.ClassComboBox);
             this.Controls.Add(this.ThingComboBox);
@@ -193,6 +217,7 @@
             this.MaximizeBox = false;
             this.Name = "AddShoolGradeForm";
             this.Text = "Поставить оценку";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEdit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,9 +232,11 @@
         private System.Windows.Forms.Label StudentaNameLabel;
         private System.Windows.Forms.ComboBox ThingComboBox;
         private System.Windows.Forms.ComboBox ClassComboBox;
-        private System.Windows.Forms.ComboBox ShoolGradeLabelComboBox;
+        private System.Windows.Forms.ComboBox ShoolGradeomboBox;
         private System.Windows.Forms.MonthCalendar Calendar;
         private System.Windows.Forms.TextBox DataTextBox;
         private System.Windows.Forms.ComboBox StudentComboBox;
+        private System.Windows.Forms.Button EditButton;
+        private System.Windows.Forms.DataGridView dataGridViewEdit;
     }
 }
