@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace BD
 {
@@ -16,9 +18,16 @@ namespace BD
 
         private Point _lastPos;
 
+        private PrintDocument printDocument1 = new PrintDocument();
+        private Bitmap memoryImage;
+
         public Print(string[] titles, params List<Dictionary<object, object>> [] allItems)
         {
             InitializeComponent();
+
+            printButton.Click += new EventHandler(printButton_Click);
+            printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+
             _lastPos = new Point(0, label1.Location.Y + label1.Height + 15);
             AutoScroll = true;
             int i = 0;
@@ -54,6 +63,27 @@ namespace BD
             _lastPos = new Point(_lastPos.X, _lastPos.Y + dataGridView.Height + 15);
 
             Controls.Add(dataGridView);            
+        }
+
+        private void printButton_Click(object sender, EventArgs e)
+        {
+            CaptureScreen();
+            printDocument1.Print();
+        }
+
+        private void CaptureScreen()
+        {
+            Graphics myGraphics = this.CreateGraphics();
+            Size s = this.Size;
+            memoryImage = new Bitmap(s.Width, s.Height, myGraphics);
+            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
+            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
+        }
+
+        private void printDocument1_PrintPage(System.Object sender,
+               System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(memoryImage, 0, 0);
         }
     }
 }

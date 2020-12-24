@@ -216,7 +216,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "AddShoolGradeForm";
-            this.Text = "Поставить оценку";
+            this.Text = "Поставить/именить оценку";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEdit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

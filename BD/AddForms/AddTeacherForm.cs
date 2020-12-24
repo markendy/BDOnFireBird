@@ -39,7 +39,7 @@ namespace BD
             {
                 MessageBox.Show("Неккоректно заполнено ФИО");
             }
-            else if(CabinetComboBox.SelectedItem == null)
+            else if (CabinetComboBox.SelectedItem == null)
             {
                 _addTeacherHandler(new Teacher(
                     TeacherFullNameLabelTextBox.Text.Split()[0],
@@ -48,16 +48,20 @@ namespace BD
                     ThingListBox,
                     LoginTextBox.Text,
                     PasswordTextBox.Text));
+                ReloadDelField();
             }
             else
+            {
                 _addTeacherHandler(new Teacher(
                     TeacherFullNameLabelTextBox.Text.Split()[0],
                     TeacherFullNameLabelTextBox.Text.Split()[1],
-                    TeacherFullNameLabelTextBox.Text.Split()[2],                    
+                    TeacherFullNameLabelTextBox.Text.Split()[2],
                     ThingListBox,
                     LoginTextBox.Text,
                     PasswordTextBox.Text,
                     ((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Key.ToString()));
+                ReloadDelField();
+            }
         }
 
         private void ThingComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,7 +107,7 @@ namespace BD
 
         private void CabinetComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CabinetTextBox.Text = ((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Value.ToString();
+            //CabinetTextBox.Text = ((KeyValuePair<object, object>)CabinetComboBox.SelectedItem).Value.ToString();
         }
 
         private void ReloadDelField()
@@ -114,7 +118,7 @@ namespace BD
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM TEACHER " +
-                $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
+                $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
                 //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
                 //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
                 $";");
@@ -127,14 +131,14 @@ namespace BD
             {
                 string request = ($"DELETE FROM PERSONAL WHERE ID = (" +
                     $"SELECT USER_ID FROM TEACHER " +
-                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
                     //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
                     //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
                     $";");
 
                 MainForm.DataBase.DUIRequest(request, true);
                 request = ($"DELETE FROM TEACHER " +
-                    $"WHERE LAST_NAME = '{((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Value.ToString()}'" +
+                    $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
                     //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
                     //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
                     $";");

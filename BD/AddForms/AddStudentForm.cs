@@ -40,6 +40,7 @@ namespace BD
             if (StudentFirstNameTextBox.Text != "" || StudentLastNameTextBox.Text != "" || StudentClassComboBox.Text != "")
             {
                 _addStudentHandler(new Student(StudentFirstNameTextBox.Text, StudentLastNameTextBox.Text, ((KeyValuePair<object, object>)StudentClassComboBox.SelectedItem).Key, LoginTextBox.Text, PasswordTextBox.Text));
+                ReloadDelField();
             }
             else
                 MessageBox.Show("Некоторые поля пусты");
@@ -48,7 +49,7 @@ namespace BD
         private void DelStud(object sender, EventArgs e)
         {
             var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM STUDENT " +
-                $"WHERE STUDENT.ID = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}'" +
+                $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
                 //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                 $";");
 
@@ -60,13 +61,13 @@ namespace BD
             {
                 string request = ($"DELETE FROM PERSONAL WHERE ID in (" +
                     $"SELECT USER_ID FROM STUDENT " +
-                    $"WHERE STUDENT.ID = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}'" +
+                    $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
                     //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                     $");");
 
                 MainForm.DataBase.DUIRequest(request, true);
                 request = ($"DELETE FROM STUDENT " +
-                    $"WHERE STUDENT.ID = '{((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}'" +
+                    $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
                     //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                     $";");
                 _addStudentHandler(null, request);

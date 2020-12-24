@@ -201,7 +201,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddLessonForm";
-            this.Text = "Добавление урок";
+            this.Text = "Добавление урока";
             this.ResumeLayout(false);
             this.PerformLayout();
 

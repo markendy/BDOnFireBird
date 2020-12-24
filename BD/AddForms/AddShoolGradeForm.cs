@@ -38,7 +38,7 @@ namespace BD
                 $"JOIN STUDENT ON (PERFORMANCE.STUDENT_ID = STUDENT.ID) " +
                 $"JOIN THING ON (PERFORMANCE.THING_ID = THING.ID) " +
                 $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)StudentComboBox.SelectedItem).Key}" +
-                $"ORDER BY \"Дата\";");
+                $"ORDER BY \"Дата\" DESC;");
                 if (res.Count != 0)
                 {
                     _table.CreateMainTableView(res, true);

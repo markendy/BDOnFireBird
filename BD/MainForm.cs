@@ -178,7 +178,7 @@ namespace BD
                 $"JOIN TEACHER ON (LESSON.TEACHER_ID = TEACHER.ID) " +
                 $"JOIN CLASS ON (LESSON.CLASS_ID = CLASS.ID) " +
                 $"JOIN THING ON (LESSON.THING_ID = THING.ID) " +
-                $"ORDER BY \"Дата\";"));
+                $"ORDER BY \"Дата\" DESC;"));
         }
 
         private void OBSScore_Click(object sender, EventArgs e)
@@ -187,7 +187,7 @@ namespace BD
                 $"PERFORMANCE.\"DATA\" as \"Дата\", PERFORMANCE.SCORE as \"Оценка\", (STUDENT.LAST_NAME || STUDENT.FIRST_NAME) as \"Ученик\", THING.NAME as \"Предмет\" FROM PERFORMANCE " +
                 $"JOIN STUDENT ON (PERFORMANCE.STUDENT_ID = STUDENT.ID) " +
                 $"JOIN THING ON (PERFORMANCE.THING_ID = THING.ID)" +
-                $"ORDER BY \"Дата\";"));
+                $"ORDER BY \"Дата\" DESC;"));
         }
 
         //========================================================
