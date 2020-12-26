@@ -96,14 +96,14 @@ namespace BD
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            if (ShoolGradeomboBox.SelectedItem != null)
+            if (ShoolGradeomboBox.SelectedItem != null && dataGridViewEdit.CurrentCell != null)
             {
                 var selected = dataGridViewEdit.CurrentCell.RowIndex;
                 _addSchoolGradeHandler($"UPDATE PERFORMANCE SET SCORE = {ShoolGradeomboBox.Text} WHERE ID = {dataGridViewEdit[0, selected].Value};");
                 CreateScoreTable();
             }
             else
-                MessageBox.Show("Пустая оценка");            
+                MessageBox.Show("Пустая оценка или выбранная строка");            
         }
     }
 }

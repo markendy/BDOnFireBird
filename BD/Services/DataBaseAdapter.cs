@@ -11,7 +11,7 @@ namespace BD
     public class DataBaseAdapter
     {
         private FbConnection _fbCon;
-        private TextBox reqShow;
+        private TextBox reqShow;        
 
         public DataBaseAdapter(TextBox label)
         {
@@ -42,14 +42,15 @@ namespace BD
             fb_cons.DataSource = "localhost";
             fb_cons.Password = "123123";
             fb_cons.Pooling = true;
-            fb_cons.Database = @"E:\Comp 5.0\Life on vuz\VUZ\Semestr 5\BD\FireBirdEmbedx64\SHOOLK2";
+            fb_cons.Database = String.Format(@"{0}/SHOOLK2", Environment.CurrentDirectory);
             fb_cons.ServerType = FbServerType.Default;
             _fbCon = new FbConnection(fb_cons.ToString());
             return role;
         }
 
-        public object RequestWithReturnId(string request, bool isCommit)
+        public object RequestWithReturnId(string request, bool isCommit, bool notification = true)
         {
+            if (notification)
             try
             {
                 Console.WriteLine(request);
@@ -70,6 +71,26 @@ namespace BD
                 MainForm.IsResultOk = false;
                 _fbCon.Close();
                 return 0;
+            }
+            else
+            {
+                try
+                {
+                    Console.WriteLine(request);
+                    _fbCon.Open();
+                    FbTransaction transaction = _fbCon.BeginTransaction();
+                    FbCommand command = new FbCommand(request, _fbCon, transaction);
+                    var ans = command.ExecuteScalar();
+                    transaction.Commit();
+                    _fbCon.Close();
+                    return ans;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("[ERROR] "+e.Message);
+                    _fbCon.Close();
+                    return null;
+                }
             }
         }
 
@@ -128,26 +149,26 @@ namespace BD
 
         public void DUIRequest(string request, bool isCommit)
         {
-            try
-            {
-                Console.WriteLine(request);
-                _fbCon.Open();
-                FbTransaction transaction = _fbCon.BeginTransaction();
-                FbCommand command = new FbCommand(request, _fbCon, transaction);
-                command.ExecuteNonQuery();
-                if (isCommit)
-                    transaction.Commit();
-                else
-                    transaction.Rollback();
-                _fbCon.Close();
-                reqShow.Text = request;
-            }
-            catch (FbException e)
-            {
-                MessageBox.Show("Ошибка " + e.Message);
-                MainForm.IsResultOk = false;
-                _fbCon.Close();
-            }
+                try
+                {
+                    Console.WriteLine(request);
+                    _fbCon.Open();
+                    FbTransaction transaction = _fbCon.BeginTransaction();
+                    FbCommand command = new FbCommand(request, _fbCon, transaction);
+                    command.ExecuteNonQuery();
+                    if (isCommit)
+                        transaction.Commit();
+                    else
+                        transaction.Rollback();
+                    _fbCon.Close();
+                    reqShow.Text = request;
+                }
+                catch (FbException e)
+                {
+                        MessageBox.Show("Ошибка " + e.Message);             
+                        MainForm.IsResultOk = false;                
+                    _fbCon.Close();
+                }            
         }
 
         public List<Dictionary<object, object>> ShowOnMainTable(string table)

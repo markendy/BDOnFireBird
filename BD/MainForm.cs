@@ -40,6 +40,10 @@ namespace BD
             DataBase = new DataBaseAdapter(ReqView);
             _tableView = new TableView(DataGridView);
 
+            DataBase.Connect("SYSDBA");
+            CreateObsStudent();
+            CreateEditorTeacher();
+
             // SYSTEM :: _tableView.CreateMainTableView(_dataBase.SelectRequest("select * from sec$users;"));
 
             forStudent = new List<Button>();
@@ -89,7 +93,7 @@ namespace BD
 
         private void ShowForStudent()
         {
-            foreach(var butt in forStudent)
+            foreach (var butt in forStudent)
             {
                 butt.Visible = true;
             }
@@ -111,6 +115,53 @@ namespace BD
             {
                 butt.Visible = true;
             }
+        }
+
+
+        private void CreateObsStudent()
+        {
+            DataBase.Connect("SYSDBA");
+
+            DataBase.RequestWithReturnId("DROP ROLE OBS", true, false);
+
+            DataBase.RequestWithReturnId("CREATE ROLE OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON BIND_TEACHER_THING TO OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON CABINET TO OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON CLASS TO OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON LESSON TO OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON PERFORMANCE TO OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON STUDENT TO OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON TEACHER TO OBS", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT ON THING TO OBS", true, false);
+
+            DataBase.RequestWithReturnId("DROP USER STUDENT;", true, false);
+
+            DataBase.RequestWithReturnId("CREATE USER STUDENT PASSWORD '123123' using plugin Srp", true, false);
+            DataBase.RequestWithReturnId("GRANT OBS TO STUDENT", true, false);
+        }
+
+        private void CreateEditorTeacher()
+        {
+            DataBase.Connect("SYSDBA");
+
+            DataBase.RequestWithReturnId("DROP ROLE EDITOR", true, false);
+
+            DataBase.RequestWithReturnId("CREATE ROLE EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, REFERENCES ON BIND_TEACHER_THING TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, REFERENCES ON CABINET TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, REFERENCES ON CLASS TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, REFERENCES ON LESSON TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, UPDATE, INSERT, REFERENCES ON PERFORMANCE TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, REFERENCES ON STUDENT TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, REFERENCES   ON TEACHER TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT SELECT, REFERENCES ON THING TO EDITOR", true, false);
+            DataBase.RequestWithReturnId("GRANT USAGE ON SEQUENCE GEN_PERFORMANCE_ID TO EDITOR", true, false);
+
+            DataBase.RequestWithReturnId("DROP USER TEACHER;", true, false);
+
+            DataBase.RequestWithReturnId("CREATE USER TEACHER PASSWORD '123123' using plugin Srp", true, false);
+            DataBase.RequestWithReturnId("GRANT EDITOR TO TEACHER", true, false);
+
         }
 
         //========================================================
@@ -249,7 +300,7 @@ namespace BD
             {
                 DataBase.DUIRequest(request, true);
             }
-            
+
             ShowSucsess();
 
             //_tableView.CreateMainTableView(DataBase.ShowOnMainTable("TEACHER"));
@@ -269,7 +320,7 @@ namespace BD
             if (request == null)
             {
                 var lastIdUser = DataBase.RequestWithReturnId($"INSERT INTO PERSONAL VALUES(null, '{student.Login}','{student.Password}','STUDENT') RETURNING ID;", true);
-                DataBase.DUIRequest($"INSERT INTO STUDENT VALUES(null, '{student.FirstName}', '{student.LastName}', {student.Class}, {lastIdUser});", true);              
+                DataBase.DUIRequest($"INSERT INTO STUDENT VALUES(null, '{student.FirstName}', '{student.LastName}', {student.Class}, {lastIdUser});", true);
 
             }
             else
