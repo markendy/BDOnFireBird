@@ -17,4 +17,3 @@ E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.csproj.CoreCompile
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.csproj.CopyComplete
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.exe
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.pdb
-E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.csprojAssemblyReference.cache

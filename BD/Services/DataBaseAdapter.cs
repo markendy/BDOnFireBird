@@ -1,6 +1,7 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,63 @@ namespace BD
     public class DataBaseAdapter
     {
         private FbConnection _fbCon;
-        private TextBox reqShow;        
+        private TextBox reqShow;
+        private StreamReader _streamReader;
+        private string _password = "123123";
 
         public DataBaseAdapter(TextBox label)
         {
             reqShow = label;
+            _streamReader = new StreamReader("pass.txt");
+            Password = _streamReader.ReadLine();
+        }
+
+        public string Password { get => _password; set { _password = value; } }
+
+        public void CreateObsStudent()
+        {
+            Connect("SYSDBA");
+
+            RequestWithReturnId("DROP ROLE OBS", true, false);
+
+            RequestWithReturnId("CREATE ROLE OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON BIND_TEACHER_THING TO OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON CABINET TO OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON CLASS TO OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON LESSON TO OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON PERFORMANCE TO OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON STUDENT TO OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON TEACHER TO OBS", true, false);
+            RequestWithReturnId("GRANT SELECT ON THING TO OBS", true, false);
+
+            RequestWithReturnId("DROP USER STUDENT;", true, false);
+
+            RequestWithReturnId($"CREATE USER STUDENT PASSWORD '{Password}' using plugin Srp", true, false);
+            RequestWithReturnId("GRANT OBS TO STUDENT", true, false);
+        }
+
+        public void CreateEditorTeacher()
+        {
+            Connect("SYSDBA");
+
+            RequestWithReturnId("DROP ROLE EDITOR", true, false);
+
+            RequestWithReturnId("CREATE ROLE EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, REFERENCES ON BIND_TEACHER_THING TO EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, REFERENCES ON CABINET TO EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, REFERENCES ON CLASS TO EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, REFERENCES ON LESSON TO EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, UPDATE, INSERT, REFERENCES ON PERFORMANCE TO EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, REFERENCES ON STUDENT TO EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, REFERENCES   ON TEACHER TO EDITOR", true, false);
+            RequestWithReturnId("GRANT SELECT, REFERENCES ON THING TO EDITOR", true, false);
+            RequestWithReturnId("GRANT USAGE ON SEQUENCE GEN_PERFORMANCE_ID TO EDITOR", true, false);
+
+            RequestWithReturnId("DROP USER TEACHER;", true, false);
+
+            RequestWithReturnId($"CREATE USER TEACHER PASSWORD '{Password}' using plugin Srp", true, false);
+            RequestWithReturnId("GRANT EDITOR TO TEACHER", true, false);
+
         }
 
         public string CheckUser(User user)
@@ -40,7 +93,7 @@ namespace BD
             fb_cons.Role = role;
             fb_cons.WireCrypt = FbWireCrypt.Enabled;
             fb_cons.DataSource = "localhost";
-            fb_cons.Password = "123123";
+            fb_cons.Password = Password;
             fb_cons.Pooling = true;
             fb_cons.Database = String.Format(@"{0}/SHOOLK2", Environment.CurrentDirectory);
             fb_cons.ServerType = FbServerType.Default;
