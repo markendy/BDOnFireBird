@@ -16,14 +16,16 @@ namespace BD
 
         private TableView _table;
 
+        private EditScore editForm;
+
         public AddShoolGradeForm(MainForm.RequestrDelegate _addSchoolGradeDelegate)
         {
             InitializeComponent();
 
             _table = new TableView(dataGridViewEdit);            
 
-            MainForm.DataBase.SetComboBox(ThingComboBox, "THING", "NAME");
-            MainForm.DataBase.SetComboBox(ClassComboBox, "CLASS", "NAME");
+            MainForm.DataBase.SetComboBox(false, ThingComboBox, "THING", "NAME");
+            MainForm.DataBase.SetComboBox(false, ClassComboBox, "CLASS", "NAME");
             DataTextBox.Text = Calendar.SelectionRange.Start.ToString("dd.MM.yyyy");
 
             _addSchoolGradeHandler += _addSchoolGradeDelegate;
@@ -34,8 +36,9 @@ namespace BD
             if (StudentComboBox != null && StudentComboBox.SelectedItem != null && StudentComboBox.Items.Count != 0)
             {
                 var res = MainForm.DataBase.SelectRequest($"SELECT " +
-                $"PERFORMANCE.ID, PERFORMANCE.\"DATA\" as \"Дата\", PERFORMANCE.SCORE as \"Оценка\", (STUDENT.LAST_NAME || ' '|| STUDENT.FIRST_NAME) as \"Ученик\", THING.NAME as \"Предмет\" FROM PERFORMANCE " +
+                $"PERFORMANCE.ID, PERFORMANCE.\"DATA\" as \"Дата\", PERFORMANCE.SCORE as \"Оценка\", (STUDENT.LAST_NAME || ' '|| STUDENT.FIRST_NAME) as \"Ученик\", CLASS.NAME as \"Класс\", THING.NAME as \"Предмет\" FROM PERFORMANCE " +
                 $"JOIN STUDENT ON (PERFORMANCE.STUDENT_ID = STUDENT.ID) " +
+                $"JOIN CLASS ON (STUDENT.CLASS_ID = CLASS.ID) " +
                 $"JOIN THING ON (PERFORMANCE.THING_ID = THING.ID) " +
                 $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)StudentComboBox.SelectedItem).Key}" +
                 $"ORDER BY \"Дата\" DESC;");
@@ -69,7 +72,7 @@ namespace BD
 
         private void DataTextBoxClick(object sender, EventArgs e)
         {
-            Calendar.Location = new Point(DataTextBox.Location.X, DataTextBox.Location.Y + DataTextBox.Size.Height - Calendar.Size.Height);
+            Calendar.Location = new Point(DataTextBox.Location.X, DataTextBox.Location.Y + DataTextBox.Size.Height);
             Calendar.Visible = true;
         }
 
@@ -85,7 +88,7 @@ namespace BD
 
         private void ClassComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            MainForm.DataBase.SetComboBox(StudentComboBox, "STUDENT", "(STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME)", null, $"CLASS_ID = {((KeyValuePair<object, object>)ClassComboBox.SelectedItem).Key}");
+            MainForm.DataBase.SetComboBox(false, StudentComboBox, "STUDENT", "(STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME)", null, $"CLASS_ID = {((KeyValuePair<object, object>)ClassComboBox.SelectedItem).Key}");
         }
 
         private void StudentComboBoxSelectedIndexChanged(object sender, EventArgs e)
@@ -94,16 +97,19 @@ namespace BD
             CreateScoreTable();
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
+        private void dataGridViewEdit_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (ShoolGradeomboBox.SelectedItem != null && dataGridViewEdit.CurrentCell != null)
-            {
-                var selected = dataGridViewEdit.CurrentCell.RowIndex;
-                _addSchoolGradeHandler($"UPDATE PERFORMANCE SET SCORE = {ShoolGradeomboBox.Text} WHERE ID = {dataGridViewEdit[0, selected].Value};");
-                CreateScoreTable();
-            }
-            else
-                MessageBox.Show("Пустая оценка или выбранная строка");            
+            int selected = dataGridViewEdit.CurrentCell.RowIndex;
+            editForm = new EditScore(dataGridViewEdit[0, selected].Value, EditRequest);
+            editForm.Show();
+            CreateScoreTable();
+        }
+
+        public void EditRequest(string req)
+        {
+            editForm.Close();
+            _addSchoolGradeHandler(req);
+            CreateScoreTable();
         }
     }
 }

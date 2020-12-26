@@ -59,11 +59,11 @@
             // 
             // AddShoolGradeButton
             // 
-            this.AddShoolGradeButton.Location = new System.Drawing.Point(479, 157);
+            this.AddShoolGradeButton.Location = new System.Drawing.Point(322, 128);
             this.AddShoolGradeButton.Name = "AddShoolGradeButton";
             this.AddShoolGradeButton.Size = new System.Drawing.Size(151, 23);
             this.AddShoolGradeButton.TabIndex = 1;
-            this.AddShoolGradeButton.Text = "Поставить оценку";
+            this.AddShoolGradeButton.Text = "Проставление оценок";
             this.AddShoolGradeButton.UseVisualStyleBackColor = true;
             this.AddShoolGradeButton.Visible = false;
             this.AddShoolGradeButton.Click += new System.EventHandler(this.AddShoolGradeClick);
@@ -83,7 +83,7 @@
             // 
             this.QuestButton.Location = new System.Drawing.Point(8, 128);
             this.QuestButton.Name = "QuestButton";
-            this.QuestButton.Size = new System.Drawing.Size(151, 52);
+            this.QuestButton.Size = new System.Drawing.Size(151, 23);
             this.QuestButton.TabIndex = 3;
             this.QuestButton.Text = "Задания, справки, отчеты";
             this.QuestButton.UseVisualStyleBackColor = true;

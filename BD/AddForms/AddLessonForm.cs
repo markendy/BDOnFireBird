@@ -18,8 +18,8 @@ namespace BD
         {
             InitializeComponent();
 
-            MainForm.DataBase.SetComboBox(ThingComboBox, "THING", "NAME");
-            MainForm.DataBase.SetComboBox(ClassComboBox, "CLASS", "NAME");
+            MainForm.DataBase.SetComboBox(false, ThingComboBox, "THING", "NAME");
+            MainForm.DataBase.SetComboBox(false, ClassComboBox, "CLASS", "NAME");
             DataTextBox.Text = Calendar.SelectionRange.Start.ToString("dd.MM.yyyy");
 
             _addLessonHandler += _addLessonDelegate;
@@ -78,9 +78,9 @@ namespace BD
             var items = MainForm.DataBase.SelectRequest($"SELECT TEACHER.ID, (TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME) FROM TEACHER " +
                 $"JOIN BIND_TEACHER_THING ON (BIND_TEACHER_THING.TEACHER_ID = TEACHER.ID) " +
                 $"WHERE BIND_TEACHER_THING.THING_ID = {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key};");  
-            MainForm.DataBase.SetComboBox(items, TeacherComboBox);
+            MainForm.DataBase.SetComboBox(true, items, TeacherComboBox);
             if (items.Count == 0)
-                MainForm.DataBase.SetComboBox(items, CabinetComboBox);
+                MainForm.DataBase.SetComboBox(true, items, CabinetComboBox);
         }
 
         private void TeacherComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace BD
             items = MainForm.DataBase.SelectRequest($"SELECT CABINET.ID, CABINET.NUMBER FROM CABINET JOIN TEACHER " +
             $"ON (TEACHER.CABINET_ID = CABINET.ID) " +
             $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)TeacherComboBox.SelectedItem).Key};");
-            MainForm.DataBase.SetComboBox(items, CabinetComboBox);
+            MainForm.DataBase.SetComboBox(true, items, CabinetComboBox);
         }
     }
 }

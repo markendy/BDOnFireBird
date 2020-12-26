@@ -20,8 +20,8 @@ namespace BD
         {
             InitializeComponent();
 
-            MainForm.DataBase.SetComboBox(ThingListBox, "THING", "NAME");
-            MainForm.DataBase.SetComboBox(CabinetComboBox, "CABINET", "NUMBER");
+            MainForm.DataBase.SetComboBox(false, ThingListBox, "THING", "NAME");
+            MainForm.DataBase.SetComboBox(false, CabinetComboBox, "CABINET", "NUMBER");
 
             ReloadDelField();
 
@@ -79,7 +79,7 @@ namespace BD
             if (Convert.ToInt32(r) == 0)
             {
                 MainForm.DataBase.DUIRequest($"INSERT INTO THING VALUES(null, '{ThingTextBox.Text}');", true);
-                MainForm.DataBase.SetComboBox(ThingListBox, "THING", "NAME");
+                MainForm.DataBase.SetComboBox(true, ThingListBox, "THING", "NAME");
                 ThingListBox.Text = ThingTextBox.Text;
             }
             else
@@ -96,7 +96,7 @@ namespace BD
             if (Convert.ToInt32(r) == 0)
             {
                 MainForm.DataBase.DUIRequest($"INSERT INTO CABINET VALUES(null, {CabinetTextBox.Text}) RETURNING ID;", true); 
-                MainForm.DataBase.SetComboBox(CabinetComboBox, "CABINET", "NUMBER");                
+                MainForm.DataBase.SetComboBox(true, CabinetComboBox, "CABINET", "NUMBER");                
                 CabinetComboBox.Text = CabinetTextBox.Text;    
             }
             else
@@ -112,38 +112,41 @@ namespace BD
 
         private void ReloadDelField()
         {
-            MainForm.DataBase.SetComboBox(LastNameСomboBox, "TEACHER", "(TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME)");
+            MainForm.DataBase.SetComboBox(true, LastNameСomboBox, "TEACHER", "(TEACHER.LAST_NAME || ' ' || TEACHER.MIDDLE_NAME || ' ' || TEACHER.FIRST_NAME)");
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM TEACHER " +
-                $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
-                //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
-                $";");
-
-            if (count.Count == 0)
+            if (LastNameСomboBox.SelectedItem != null)
             {
-                MessageBox.Show("Преподавателя нет");
-            }
-            else
-            {
-                string request = ($"DELETE FROM PERSONAL WHERE ID = (" +
-                    $"SELECT USER_ID FROM TEACHER " +
+                var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM TEACHER " +
                     $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
                     //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
                     //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
                     $";");
 
-                MainForm.DataBase.DUIRequest(request, true);
-                request = ($"DELETE FROM TEACHER " +
-                    $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
-                    //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
-                    $";");
-                _addTeacherHandler(null, request);
-                ReloadDelField();
+                if (count.Count == 0)
+                {
+                    MessageBox.Show("Преподавателя нет");
+                }
+                else
+                {
+                    string request = ($"DELETE FROM PERSONAL WHERE PERSONAL.ID IN (" +
+                        $"SELECT TEACHER.USER_ID FROM TEACHER " +
+                        $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
+                        //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                        //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                        $");");
+
+                    MainForm.DataBase.DUIRequest(request, true);
+                    request = ($"DELETE FROM TEACHER " +
+                        $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)LastNameСomboBox.SelectedItem).Key.ToString()}" +
+                        //$"AND MIDDLE_NAME = '{((KeyValuePair<object, object>)MiddleNameСomboBox.SelectedItem).Value.ToString()}'" +
+                        //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)FirstNameСomboBox.SelectedItem).Value.ToString()}'" +
+                        $";");
+                    _addTeacherHandler(null, request);
+                    ReloadDelField();
+                }
             }
         }
     }

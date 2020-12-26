@@ -133,7 +133,7 @@ namespace BD
         }
 
         private void QuestButton_Click(object sender, EventArgs e)
-        {
+        {            
             _quest1Form = new QuestForm(Quest);
             _quest1Form.Show();
             //_tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT ID, \"DATE\", EXTRACT(WEEKDAY FROM \"DATE\") as wd FROM LESSON WHERE EXTRACT(WEEKDAY FROM \"DATE\") = 3 ;"));
@@ -187,9 +187,10 @@ namespace BD
         private void OBSScore_Click(object sender, EventArgs e)
         {
             _tableView.CreateMainTableView(DataBase.SelectRequest($"SELECT " +
-                $"PERFORMANCE.\"DATA\" as \"Дата\", PERFORMANCE.SCORE as \"Оценка\", (STUDENT.LAST_NAME || STUDENT.FIRST_NAME) as \"Ученик\", THING.NAME as \"Предмет\" FROM PERFORMANCE " +
+                $"PERFORMANCE.\"DATA\" as \"Дата\", PERFORMANCE.SCORE as \"Оценка\", (STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME) as \"Ученик\", CLASS.NAME as \"Класс\",THING.NAME as \"Предмет\" FROM PERFORMANCE " +
                 $"JOIN STUDENT ON (PERFORMANCE.STUDENT_ID = STUDENT.ID) " +
                 $"JOIN THING ON (PERFORMANCE.THING_ID = THING.ID)" +
+                $"JOIN CLASS ON (STUDENT.CLASS_ID = CLASS.ID)" +
                 $"ORDER BY \"Дата\" DESC;"));
         }
 

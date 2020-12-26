@@ -18,7 +18,7 @@ namespace BD
         public AddStudentForm(StudentDelegate requestrDelegate)
         {
             InitializeComponent();
-            MainForm.DataBase.SetComboBox(StudentClassComboBox, "CLASS", "NAME");
+            MainForm.DataBase.SetComboBox(false, StudentClassComboBox, "CLASS", "NAME");
 
             ReloadDelField();
 
@@ -32,7 +32,7 @@ namespace BD
 
         private void ReloadDelField()
         {
-            MainForm.DataBase.SetComboBox(DelFirstNameComboBox, "STUDENT", "(STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME)");
+            MainForm.DataBase.SetComboBox(true, DelFirstNameComboBox, "STUDENT", "(STUDENT.LAST_NAME || ' ' || STUDENT.FIRST_NAME)");
         }
 
         private void AddStudentButton_Click(object sender, EventArgs e)
@@ -45,33 +45,36 @@ namespace BD
             else
                 MessageBox.Show("Некоторые поля пусты");
         }
-        
+
         private void DelStud(object sender, EventArgs e)
         {
-            var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM STUDENT " +
-                $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
-                //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
-                $";");
-
-            if (count.Count == 0)
+            if (DelFirstNameComboBox.SelectedItem != null)
             {
-                MessageBox.Show("Студента нет");
-            }
-            else
-            {
-                string request = ($"DELETE FROM PERSONAL WHERE ID in (" +
-                    $"SELECT USER_ID FROM STUDENT " +
-                    $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
-                    //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
-                    $");");
-
-                MainForm.DataBase.DUIRequest(request, true);
-                request = ($"DELETE FROM STUDENT " +
+                var count = MainForm.DataBase.SelectRequest($"SELECT ID FROM STUDENT " +
                     $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
                     //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
                     $";");
-                _addStudentHandler(null, request);
-                ReloadDelField();
+
+                if (count.Count == 0)
+                {
+                    MessageBox.Show("Студента нет");
+                }
+                else
+                {
+                    string request = ($"DELETE FROM PERSONAL WHERE ID IN (" +
+                        $"SELECT USER_ID FROM STUDENT " +
+                        $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
+                        //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
+                        $");");
+
+                    MainForm.DataBase.DUIRequest(request, true);
+                    request = ($"DELETE FROM STUDENT " +
+                        $"WHERE STUDENT.ID = {((KeyValuePair<object, object>)DelFirstNameComboBox.SelectedItem).Key.ToString()}" +
+                        //$"AND FIRST_NAME = '{((KeyValuePair<object, object>)DelLastNameComboBox.SelectedItem).Value.ToString()}'" +
+                        $";");
+                    _addStudentHandler(null, request);
+                    ReloadDelField();
+                }
             }
         }
     }

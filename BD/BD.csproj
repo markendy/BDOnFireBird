@@ -74,6 +74,12 @@
     <Compile Include="AddForms\AddTeacherForm.Designer.cs">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddForms\EditScore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddForms\EditScore.Designer.cs">
+      <DependentUpon>EditScore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quests\Print.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddForms\AddTeacherForm.resx">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddForms\EditScore.resx">
+      <DependentUpon>EditScore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

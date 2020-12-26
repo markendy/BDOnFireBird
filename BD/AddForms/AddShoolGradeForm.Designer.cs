@@ -40,15 +40,15 @@
             this.Calendar = new System.Windows.Forms.MonthCalendar();
             this.DataTextBox = new System.Windows.Forms.TextBox();
             this.StudentComboBox = new System.Windows.Forms.ComboBox();
-            this.EditButton = new System.Windows.Forms.Button();
             this.dataGridViewEdit = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEdit)).BeginInit();
             this.SuspendLayout();
             // 
             // ThingLabel
             // 
             this.ThingLabel.AutoSize = true;
-            this.ThingLabel.Location = new System.Drawing.Point(9, 12);
+            this.ThingLabel.Location = new System.Drawing.Point(87, 10);
             this.ThingLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ThingLabel.Name = "ThingLabel";
             this.ThingLabel.Size = new System.Drawing.Size(52, 13);
@@ -58,7 +58,7 @@
             // ClassLabel
             // 
             this.ClassLabel.AutoSize = true;
-            this.ClassLabel.Location = new System.Drawing.Point(9, 42);
+            this.ClassLabel.Location = new System.Drawing.Point(279, 9);
             this.ClassLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ClassLabel.Name = "ClassLabel";
             this.ClassLabel.Size = new System.Drawing.Size(38, 13);
@@ -68,7 +68,7 @@
             // ShoolGradeLabel
             // 
             this.ShoolGradeLabel.AutoSize = true;
-            this.ShoolGradeLabel.Location = new System.Drawing.Point(9, 102);
+            this.ShoolGradeLabel.Location = new System.Drawing.Point(535, 9);
             this.ShoolGradeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ShoolGradeLabel.Name = "ShoolGradeLabel";
             this.ShoolGradeLabel.Size = new System.Drawing.Size(45, 13);
@@ -78,7 +78,7 @@
             // DateLabel
             // 
             this.DateLabel.AutoSize = true;
-            this.DateLabel.Location = new System.Drawing.Point(9, 132);
+            this.DateLabel.Location = new System.Drawing.Point(8, 12);
             this.DateLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(33, 13);
@@ -87,10 +87,10 @@
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(11, 164);
+            this.AddButton.Location = new System.Drawing.Point(601, 23);
             this.AddButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(130, 24);
+            this.AddButton.Size = new System.Drawing.Size(150, 24);
             this.AddButton.TabIndex = 9;
             this.AddButton.Text = "Поставить";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             // StudentaNameLabel
             // 
             this.StudentaNameLabel.AutoSize = true;
-            this.StudentaNameLabel.Location = new System.Drawing.Point(9, 73);
+            this.StudentaNameLabel.Location = new System.Drawing.Point(343, 9);
             this.StudentaNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.StudentaNameLabel.Name = "StudentaNameLabel";
             this.StudentaNameLabel.Size = new System.Drawing.Size(44, 13);
@@ -109,9 +109,7 @@
             // ThingComboBox
             // 
             this.ThingComboBox.FormattingEnabled = true;
-            this.ThingComboBox.Items.AddRange(new object[] {
-            "Физка"});
-            this.ThingComboBox.Location = new System.Drawing.Point(91, 9);
+            this.ThingComboBox.Location = new System.Drawing.Point(90, 26);
             this.ThingComboBox.Name = "ThingComboBox";
             this.ThingComboBox.Size = new System.Drawing.Size(186, 21);
             this.ThingComboBox.TabIndex = 15;
@@ -120,11 +118,9 @@
             // ClassComboBox
             // 
             this.ClassComboBox.FormattingEnabled = true;
-            this.ClassComboBox.Items.AddRange(new object[] {
-            "11А"});
-            this.ClassComboBox.Location = new System.Drawing.Point(91, 39);
+            this.ClassComboBox.Location = new System.Drawing.Point(282, 26);
             this.ClassComboBox.Name = "ClassComboBox";
-            this.ClassComboBox.Size = new System.Drawing.Size(186, 21);
+            this.ClassComboBox.Size = new System.Drawing.Size(58, 21);
             this.ClassComboBox.TabIndex = 16;
             this.ClassComboBox.SelectedIndexChanged += new System.EventHandler(this.ClassComboBoxSelectedIndexChanged);
             // 
@@ -137,15 +133,15 @@
             "3",
             "4",
             "5"});
-            this.ShoolGradeomboBox.Location = new System.Drawing.Point(91, 99);
+            this.ShoolGradeomboBox.Location = new System.Drawing.Point(538, 26);
             this.ShoolGradeomboBox.Name = "ShoolGradeomboBox";
-            this.ShoolGradeomboBox.Size = new System.Drawing.Size(185, 21);
+            this.ShoolGradeomboBox.Size = new System.Drawing.Size(58, 21);
             this.ShoolGradeomboBox.TabIndex = 17;
             this.ShoolGradeomboBox.SelectedIndexChanged += new System.EventHandler(this.ShoolGradeLabelComboBoxSelectedIndexChanged);
             // 
             // Calendar
             // 
-            this.Calendar.Location = new System.Drawing.Point(262, 175);
+            this.Calendar.Location = new System.Drawing.Point(586, 265);
             this.Calendar.MaxSelectionCount = 1;
             this.Calendar.Name = "Calendar";
             this.Calendar.TabIndex = 20;
@@ -155,52 +151,50 @@
             // 
             // DataTextBox
             // 
-            this.DataTextBox.Location = new System.Drawing.Point(91, 129);
+            this.DataTextBox.Location = new System.Drawing.Point(12, 26);
             this.DataTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.DataTextBox.Name = "DataTextBox";
             this.DataTextBox.ReadOnly = true;
-            this.DataTextBox.Size = new System.Drawing.Size(185, 20);
+            this.DataTextBox.Size = new System.Drawing.Size(66, 20);
             this.DataTextBox.TabIndex = 19;
+            this.DataTextBox.Text = "20.20.2020";
             this.DataTextBox.Click += new System.EventHandler(this.DataTextBoxClick);
             // 
             // StudentComboBox
             // 
             this.StudentComboBox.FormattingEnabled = true;
-            this.StudentComboBox.Items.AddRange(new object[] {
-            "Петров Борисов"});
-            this.StudentComboBox.Location = new System.Drawing.Point(91, 70);
+            this.StudentComboBox.Location = new System.Drawing.Point(346, 26);
             this.StudentComboBox.Name = "StudentComboBox";
             this.StudentComboBox.Size = new System.Drawing.Size(186, 21);
             this.StudentComboBox.TabIndex = 21;
             this.StudentComboBox.SelectedIndexChanged += new System.EventHandler(this.StudentComboBoxSelectedIndexChanged);
             // 
-            // EditButton
-            // 
-            this.EditButton.Location = new System.Drawing.Point(145, 164);
-            this.EditButton.Margin = new System.Windows.Forms.Padding(2);
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(130, 24);
-            this.EditButton.TabIndex = 22;
-            this.EditButton.Text = "Изменить";
-            this.EditButton.UseVisualStyleBackColor = true;
-            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
-            // 
             // dataGridViewEdit
             // 
             this.dataGridViewEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEdit.Location = new System.Drawing.Point(296, 9);
+            this.dataGridViewEdit.Location = new System.Drawing.Point(12, 83);
             this.dataGridViewEdit.Name = "dataGridViewEdit";
-            this.dataGridViewEdit.Size = new System.Drawing.Size(472, 181);
+            this.dataGridViewEdit.Size = new System.Drawing.Size(739, 213);
             this.dataGridViewEdit.TabIndex = 23;
+            this.dataGridViewEdit.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEdit_CellContentClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(286, 13);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Для изменения оценки выберете необходимую строку";
             // 
             // AddShoolGradeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 202);
-            this.Controls.Add(this.dataGridViewEdit);
-            this.Controls.Add(this.EditButton);
+            this.ClientSize = new System.Drawing.Size(770, 317);
             this.Controls.Add(this.Calendar);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dataGridViewEdit);
             this.Controls.Add(this.StudentaNameLabel);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DateLabel);
@@ -236,7 +230,7 @@
         private System.Windows.Forms.MonthCalendar Calendar;
         private System.Windows.Forms.TextBox DataTextBox;
         private System.Windows.Forms.ComboBox StudentComboBox;
-        private System.Windows.Forms.Button EditButton;
         private System.Windows.Forms.DataGridView dataGridViewEdit;
+        private System.Windows.Forms.Label label1;
     }
 }

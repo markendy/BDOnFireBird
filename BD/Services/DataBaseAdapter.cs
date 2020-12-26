@@ -147,16 +147,16 @@ namespace BD
             }
         }
 
-        public void SetComboBox(ListControl comboBox, string table, string column2, string column1 = null, string whereR = null)
+        public void SetComboBox(bool notyfication, ListControl comboBox, string table, string column2, string column1 = null, string whereR = null)
         {
             string where = whereR != null ? $"WHERE {whereR} " : "";
             string col1 = column1 != null ? $"{column1}" : "ID";
-            var items = SelectRequest($"SELECT {col1}, {column2} FROM {table} {where}ORDER BY {column2};");
+            var items = SelectRequest($"SELECT {col1}, {column2} as column_name FROM {table} {where}ORDER BY column_name;");
             
-            SetComboBox(items, comboBox);            
+            SetComboBox(notyfication, items, comboBox);            
         }
 
-        public void SetComboBox(Dictionary<object, object> items, ListControl comboBox)
+        public void SetComboBox(bool notyfication, Dictionary<object, object> items, ListControl comboBox)
         {           
             if (items != null && items.Count != 0)
             {                               
@@ -164,7 +164,8 @@ namespace BD
             }
             else
             {
-                MessageBox.Show("Одна из выборок пуста");
+                if (notyfication)
+                    MessageBox.Show("Одна из выборок пуста");
                 MainForm.IsResultOk = false;
                 comboBox.DataSource = new BindingSource(null, null);
             }
@@ -173,7 +174,7 @@ namespace BD
             comboBox.Refresh();
         }
 
-        public void SetComboBox(List<Dictionary<object, object>> items, ListControl comboBox)
+        public void SetComboBox(bool notyfication, List<Dictionary<object, object>> items, ListControl comboBox)
         {
             var listDic = new Dictionary<object, object>();
             if (items != null && items.Count != 0)
@@ -188,15 +189,17 @@ namespace BD
                     listDic[vl[0]] = vl[1];
                 }
                 comboBox.DataSource = new BindingSource(listDic, null);
+                comboBox.DisplayMember = "Value";
+                comboBox.ValueMember = "Value";
             }
             else
             {
-                MessageBox.Show("Одна из выборок пуста");
+                if(notyfication)
+                    MessageBox.Show("Одна из выборок пуста");
                 MainForm.IsResultOk = false;
-                comboBox.DataSource = new BindingSource(null, null);
-            }
-            comboBox.DisplayMember = "Value";
-            comboBox.ValueMember = "Value";
+                listDic = new Dictionary<object, object>();
+            }            
+            
             comboBox.Refresh();
         }
 
