@@ -166,7 +166,7 @@ namespace BD
             {
                 if (notyfication)
                     MessageBox.Show("Одна из выборок пуста");
-                MainForm.IsResultOk = false;
+                //MainForm.IsResultOk = false;
                 comboBox.DataSource = new BindingSource(null, null);
             }
             comboBox.DisplayMember = "Value";
@@ -196,7 +196,7 @@ namespace BD
             {
                 if(notyfication)
                     MessageBox.Show("Одна из выборок пуста");
-                MainForm.IsResultOk = false;
+                //MainForm.IsResultOk = false;
                 listDic = new Dictionary<object, object>();
             }            
             

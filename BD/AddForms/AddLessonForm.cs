@@ -79,8 +79,6 @@ namespace BD
                 $"JOIN BIND_TEACHER_THING ON (BIND_TEACHER_THING.TEACHER_ID = TEACHER.ID) " +
                 $"WHERE BIND_TEACHER_THING.THING_ID = {((KeyValuePair<object, object>)ThingComboBox.SelectedItem).Key};");  
             MainForm.DataBase.SetComboBox(true, items, TeacherComboBox);
-            if (items.Count == 0)
-                MainForm.DataBase.SetComboBox(true, items, CabinetComboBox);
         }
 
         private void TeacherComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,6 +88,8 @@ namespace BD
             $"ON (TEACHER.CABINET_ID = CABINET.ID) " +
             $"WHERE TEACHER.ID = {((KeyValuePair<object, object>)TeacherComboBox.SelectedItem).Key};");
             MainForm.DataBase.SetComboBox(true, items, CabinetComboBox);
+            if (items.Count == 0)
+                MainForm.DataBase.SetComboBox(true, CabinetComboBox, "CABINET", "NUMBER");
         }
     }
 }

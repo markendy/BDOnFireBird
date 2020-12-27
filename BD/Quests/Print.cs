@@ -54,11 +54,14 @@ namespace BD
             {
                 label1.Text = "Выборка пуста";
                 label1.Visible = true;
+                MainForm.IsResultOk = false;
             }
         }
 
         public void AddTable(string _title, List<Dictionary<object, object>> items)
         {
+            if (items.Count == 0)
+                return;
             if (_visibleTitle)
             {
                 Label title = new Label();
@@ -74,7 +77,7 @@ namespace BD
             dataGridView.CurrentCell = null;
             dataGridView.AutoResizeColumns();
             dataGridView.BackgroundColor = Color.White;
-            dataGridView.Width = this.Width - 30;           
+            dataGridView.Width = this.Width - 30;
             dataGridView.Height = dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.None) + dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.None)/dataGridView.Rows.Count;
             dataGridView.Location = _lastPos;
             dataGridView.ColumnHeadersVisible = false;

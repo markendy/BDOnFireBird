@@ -35,9 +35,9 @@ namespace BD
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            if (TeacherFullNameLabelTextBox.Text.Split().Length != 3)
+            if (TeacherFullNameLabelTextBox.Text.Split().Length != 3 || ThingListBox.SelectedItems.Count == 0 || LoginTextBox.Text == "" || PasswordTextBox.Text == "")
             {
-                MessageBox.Show("Неккоректно заполнено ФИО");
+                MessageBox.Show("Неккоректно заполненые поля");
             }
             else if (CabinetComboBox.SelectedItem == null)
             {

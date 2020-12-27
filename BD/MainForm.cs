@@ -265,7 +265,7 @@ namespace BD
 
             ShowSucsess();
 
-            _tableView.CreateMainTableView(DataBase.ShowOnMainTable("CLASS"));
+            //_tableView.CreateMainTableView(DataBase.ShowOnMainTable("CLASS"));
         }
 
         private void AddStudent(Student student, string request)

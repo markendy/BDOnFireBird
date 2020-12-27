@@ -1,3 +1,7 @@
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\BD.exe.config
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\BD.exe
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\BD.pdb
+E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\FirebirdSql.Data.FirebirdClient.dll
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.AddLessonForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.AddShoolGradeForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.AddClassForm.resources
@@ -11,10 +15,6 @@ E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.Print.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.QuestForm.resources
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.csproj.GenerateResource.cache
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.csproj.CoreCompileInputs.cache
-E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\BD.exe.config
-E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\BD.exe
-E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\BD.pdb
-E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\bin\Release\FirebirdSql.Data.FirebirdClient.dll
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.csproj.CopyComplete
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.exe
 E:\Programs\VS2017\Projects\BD\BDOnFireBird\BD\obj\Release\BD.pdb

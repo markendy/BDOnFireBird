@@ -37,13 +37,14 @@ namespace BD
 
         private void AddStudentButton_Click(object sender, EventArgs e)
         {
-            if (StudentFirstNameTextBox.Text != "" || StudentLastNameTextBox.Text != "" || StudentClassComboBox.Text != "")
+            if (StudentFirstNameTextBox.Text == "" || StudentLastNameTextBox.Text == "" || StudentClassComboBox.Text == "" || LoginTextBox.Text == "" || PasswordTextBox.Text == "")
             {
-                _addStudentHandler(new Student(StudentFirstNameTextBox.Text, StudentLastNameTextBox.Text, ((KeyValuePair<object, object>)StudentClassComboBox.SelectedItem).Key, LoginTextBox.Text, PasswordTextBox.Text));
-                ReloadDelField();
+                MessageBox.Show("Некоторые поля пусты");
+                
             }
             else
-                MessageBox.Show("Некоторые поля пусты");
+                _addStudentHandler(new Student(StudentFirstNameTextBox.Text, StudentLastNameTextBox.Text, ((KeyValuePair<object, object>)StudentClassComboBox.SelectedItem).Key, LoginTextBox.Text, PasswordTextBox.Text));
+            ReloadDelField();
         }
 
         private void DelStud(object sender, EventArgs e)
